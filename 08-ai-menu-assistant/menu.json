@@ -1,0 +1,366 @@
+{
+  "restaurant": "Yum! Bites",
+  "categories": [
+    {
+      "name": "Burgers",
+      "items": [
+        {
+          "name": "Classic Burger",
+          "price": 9.99,
+          "description": "A quarter-pound beef patty with lettuce, tomato, onion, and our signature sauce on a toasted brioche bun.",
+          "category": "Burgers",
+          "ingredients": ["beef patty", "brioche bun", "lettuce", "tomato", "onion", "signature sauce", "pickles"],
+          "allergens": ["gluten", "dairy", "soy"],
+          "calories": 650,
+          "is_vegetarian": false,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "BBQ Bacon Burger",
+          "price": 12.49,
+          "description": "Smoky BBQ sauce, crispy bacon, cheddar cheese, and onion rings on a double beef patty.",
+          "category": "Burgers",
+          "ingredients": ["double beef patty", "brioche bun", "bbq sauce", "bacon", "cheddar cheese", "onion rings"],
+          "allergens": ["gluten", "dairy", "soy", "eggs"],
+          "calories": 980,
+          "is_vegetarian": false,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Mushroom Swiss Burger",
+          "price": 11.49,
+          "description": "Sauteed mushrooms and melted Swiss cheese on a seasoned beef patty.",
+          "category": "Burgers",
+          "ingredients": ["beef patty", "brioche bun", "mushrooms", "swiss cheese", "garlic butter"],
+          "allergens": ["gluten", "dairy"],
+          "calories": 720,
+          "is_vegetarian": false,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Veggie Burger",
+          "price": 10.49,
+          "description": "A house-made black bean and quinoa patty with avocado, sprouts, and chipotle aioli.",
+          "category": "Burgers",
+          "ingredients": ["black bean patty", "quinoa", "whole wheat bun", "avocado", "sprouts", "chipotle aioli"],
+          "allergens": ["gluten", "eggs", "soy"],
+          "calories": 520,
+          "is_vegetarian": true,
+          "is_vegan": false,
+          "is_spicy": true
+        },
+        {
+          "name": "Jalape\u00f1o Inferno Burger",
+          "price": 11.99,
+          "description": "A fiery burger with pepper jack cheese, jalape\u00f1os, habanero sauce, and crispy onion straws.",
+          "category": "Burgers",
+          "ingredients": ["beef patty", "brioche bun", "pepper jack cheese", "jalapenos", "habanero sauce", "onion straws"],
+          "allergens": ["gluten", "dairy", "soy"],
+          "calories": 780,
+          "is_vegetarian": false,
+          "is_vegan": false,
+          "is_spicy": true
+        }
+      ]
+    },
+    {
+      "name": "Chicken",
+      "items": [
+        {
+          "name": "Spicy Chicken Sandwich",
+          "price": 8.49,
+          "description": "Crispy fried chicken breast with spicy mayo, pickles, and coleslaw on a potato bun.",
+          "category": "Chicken",
+          "ingredients": ["chicken breast", "potato bun", "spicy mayo", "pickles", "coleslaw", "buttermilk coating"],
+          "allergens": ["gluten", "dairy", "eggs", "soy"],
+          "calories": 610,
+          "is_vegetarian": false,
+          "is_vegan": false,
+          "is_spicy": true
+        },
+        {
+          "name": "Grilled Chicken Wrap",
+          "price": 8.99,
+          "description": "Grilled chicken, mixed greens, tomatoes, and ranch dressing in a flour tortilla.",
+          "category": "Chicken",
+          "ingredients": ["grilled chicken", "flour tortilla", "mixed greens", "tomatoes", "ranch dressing", "shredded cheese"],
+          "allergens": ["gluten", "dairy", "eggs"],
+          "calories": 480,
+          "is_vegetarian": false,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Chicken Tenders",
+          "price": 7.99,
+          "description": "Five crispy hand-breaded chicken tenders served with your choice of dipping sauce.",
+          "category": "Chicken",
+          "ingredients": ["chicken tenders", "breading", "seasoning flour"],
+          "allergens": ["gluten", "eggs", "soy"],
+          "calories": 540,
+          "is_vegetarian": false,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Nashville Hot Chicken",
+          "price": 10.99,
+          "description": "Extra-spicy fried chicken thigh with cayenne glaze, bread-and-butter pickles on white bread.",
+          "category": "Chicken",
+          "ingredients": ["chicken thigh", "cayenne glaze", "white bread", "pickles", "buttermilk coating"],
+          "allergens": ["gluten", "dairy", "eggs"],
+          "calories": 720,
+          "is_vegetarian": false,
+          "is_vegan": false,
+          "is_spicy": true
+        }
+      ]
+    },
+    {
+      "name": "Sides",
+      "items": [
+        {
+          "name": "French Fries",
+          "price": 3.99,
+          "description": "Golden, crispy, seasoned fries served with ketchup.",
+          "category": "Sides",
+          "ingredients": ["potatoes", "vegetable oil", "salt", "seasoning"],
+          "allergens": [],
+          "calories": 380,
+          "is_vegetarian": true,
+          "is_vegan": true,
+          "is_spicy": false
+        },
+        {
+          "name": "Onion Rings",
+          "price": 4.49,
+          "description": "Thick-cut onion rings with a crispy beer batter coating.",
+          "category": "Sides",
+          "ingredients": ["onions", "beer batter", "breadcrumbs"],
+          "allergens": ["gluten", "eggs"],
+          "calories": 420,
+          "is_vegetarian": true,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Caesar Salad",
+          "price": 6.99,
+          "description": "Crisp romaine lettuce, parmesan cheese, croutons, and our house-made Caesar dressing.",
+          "category": "Sides",
+          "ingredients": ["romaine lettuce", "parmesan cheese", "croutons", "caesar dressing", "lemon"],
+          "allergens": ["gluten", "dairy", "eggs", "fish"],
+          "calories": 340,
+          "is_vegetarian": true,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Coleslaw",
+          "price": 2.99,
+          "description": "Fresh shredded cabbage and carrots in a creamy dressing.",
+          "category": "Sides",
+          "ingredients": ["cabbage", "carrots", "mayonnaise", "vinegar", "sugar"],
+          "allergens": ["eggs"],
+          "calories": 180,
+          "is_vegetarian": true,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Mac & Cheese",
+          "price": 4.99,
+          "description": "Creamy three-cheese macaroni baked until golden and bubbly.",
+          "category": "Sides",
+          "ingredients": ["elbow pasta", "cheddar cheese", "gruyere cheese", "mozzarella", "cream", "breadcrumbs"],
+          "allergens": ["gluten", "dairy"],
+          "calories": 520,
+          "is_vegetarian": true,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Sweet Potato Fries",
+          "price": 4.49,
+          "description": "Crispy sweet potato fries with a hint of cinnamon, served with chipotle dipping sauce.",
+          "category": "Sides",
+          "ingredients": ["sweet potatoes", "vegetable oil", "cinnamon", "salt"],
+          "allergens": [],
+          "calories": 360,
+          "is_vegetarian": true,
+          "is_vegan": true,
+          "is_spicy": false
+        },
+        {
+          "name": "Garden Side Salad",
+          "price": 3.49,
+          "description": "Mixed greens, cherry tomatoes, cucumbers, and balsamic vinaigrette.",
+          "category": "Sides",
+          "ingredients": ["mixed greens", "cherry tomatoes", "cucumbers", "balsamic vinaigrette"],
+          "allergens": [],
+          "calories": 120,
+          "is_vegetarian": true,
+          "is_vegan": true,
+          "is_spicy": false
+        },
+        {
+          "name": "Loaded Nachos",
+          "price": 7.99,
+          "description": "Tortilla chips piled high with cheese sauce, jalape\u00f1os, sour cream, salsa, and guacamole.",
+          "category": "Sides",
+          "ingredients": ["tortilla chips", "cheese sauce", "jalapenos", "sour cream", "salsa", "guacamole"],
+          "allergens": ["dairy"],
+          "calories": 680,
+          "is_vegetarian": true,
+          "is_vegan": false,
+          "is_spicy": true
+        }
+      ]
+    },
+    {
+      "name": "Drinks",
+      "items": [
+        {
+          "name": "Soft Drink",
+          "price": 2.49,
+          "description": "Choice of Coca-Cola, Diet Coke, Sprite, or Dr Pepper. Free refills.",
+          "category": "Drinks",
+          "ingredients": ["carbonated water", "syrup"],
+          "allergens": [],
+          "calories": 200,
+          "is_vegetarian": true,
+          "is_vegan": true,
+          "is_spicy": false
+        },
+        {
+          "name": "Fresh Lemonade",
+          "price": 3.49,
+          "description": "Hand-squeezed lemonade made daily with real lemons and a touch of honey.",
+          "category": "Drinks",
+          "ingredients": ["lemons", "water", "honey", "ice"],
+          "allergens": [],
+          "calories": 150,
+          "is_vegetarian": true,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Iced Tea",
+          "price": 2.49,
+          "description": "Freshly brewed black tea served over ice. Sweetened or unsweetened.",
+          "category": "Drinks",
+          "ingredients": ["black tea", "water", "ice"],
+          "allergens": [],
+          "calories": 5,
+          "is_vegetarian": true,
+          "is_vegan": true,
+          "is_spicy": false
+        },
+        {
+          "name": "Chocolate Milkshake",
+          "price": 5.49,
+          "description": "Thick and creamy chocolate milkshake made with real ice cream and topped with whipped cream.",
+          "category": "Drinks",
+          "ingredients": ["ice cream", "chocolate syrup", "milk", "whipped cream"],
+          "allergens": ["dairy"],
+          "calories": 620,
+          "is_vegetarian": true,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Sparkling Water",
+          "price": 1.99,
+          "description": "Chilled sparkling mineral water with a lemon wedge.",
+          "category": "Drinks",
+          "ingredients": ["sparkling water", "lemon"],
+          "allergens": [],
+          "calories": 0,
+          "is_vegetarian": true,
+          "is_vegan": true,
+          "is_spicy": false
+        }
+      ]
+    },
+    {
+      "name": "Desserts",
+      "items": [
+        {
+          "name": "Chocolate Brownie Sundae",
+          "price": 6.99,
+          "description": "Warm chocolate brownie topped with vanilla ice cream, hot fudge, and whipped cream.",
+          "category": "Desserts",
+          "ingredients": ["brownie", "vanilla ice cream", "hot fudge", "whipped cream", "chocolate chips"],
+          "allergens": ["gluten", "dairy", "eggs", "soy"],
+          "calories": 780,
+          "is_vegetarian": true,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Apple Pie",
+          "price": 5.49,
+          "description": "Classic warm apple pie with a flaky crust, served with a scoop of vanilla ice cream.",
+          "category": "Desserts",
+          "ingredients": ["apples", "pie crust", "cinnamon", "sugar", "butter", "vanilla ice cream"],
+          "allergens": ["gluten", "dairy", "eggs"],
+          "calories": 560,
+          "is_vegetarian": true,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Cheesecake",
+          "price": 6.49,
+          "description": "New York-style cheesecake with a graham cracker crust and strawberry topping.",
+          "category": "Desserts",
+          "ingredients": ["cream cheese", "graham cracker crust", "eggs", "sugar", "strawberry topping"],
+          "allergens": ["gluten", "dairy", "eggs"],
+          "calories": 490,
+          "is_vegetarian": true,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Peanut Butter Cookie",
+          "price": 2.99,
+          "description": "A large, soft-baked peanut butter cookie with sea salt.",
+          "category": "Desserts",
+          "ingredients": ["peanut butter", "flour", "sugar", "butter", "eggs", "sea salt"],
+          "allergens": ["gluten", "dairy", "eggs", "nuts"],
+          "calories": 320,
+          "is_vegetarian": true,
+          "is_vegan": false,
+          "is_spicy": false
+        },
+        {
+          "name": "Vegan Coconut Ice Cream",
+          "price": 4.99,
+          "description": "Two scoops of rich coconut-based ice cream with toasted coconut flakes.",
+          "category": "Desserts",
+          "ingredients": ["coconut cream", "coconut milk", "sugar", "toasted coconut flakes"],
+          "allergens": [],
+          "calories": 280,
+          "is_vegetarian": true,
+          "is_vegan": true,
+          "is_spicy": false
+        },
+        {
+          "name": "Churros",
+          "price": 4.49,
+          "description": "Three crispy cinnamon-sugar churros served with chocolate dipping sauce.",
+          "category": "Desserts",
+          "ingredients": ["flour", "butter", "eggs", "cinnamon", "sugar", "chocolate sauce"],
+          "allergens": ["gluten", "dairy", "eggs"],
+          "calories": 410,
+          "is_vegetarian": true,
+          "is_vegan": false,
+          "is_spicy": false
+        }
+      ]
+    }
+  ]
+}
