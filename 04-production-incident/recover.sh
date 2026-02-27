@@ -17,6 +17,18 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SERVER_FILE="$SCRIPT_DIR/app/server.py"
 HEALTHCHECK="$SCRIPT_DIR/healthcheck.py"
 
+# Detect Python command (test that it actually runs, not just exists)
+if python3 --version &>/dev/null 2>&1; then
+    PYTHON=python3
+elif python --version &>/dev/null 2>&1; then
+    PYTHON=python
+elif py --version &>/dev/null 2>&1; then
+    PYTHON=py
+else
+    echo "[FAIL] Python not found. Please install Python 3."
+    exit 1
+fi
+
 # Step 1: Verify the fix pattern exists in server.py
 echo "[1/4] Checking server.py for proper connection cleanup..."
 echo ""
@@ -76,7 +88,7 @@ echo ""
 
 # Step 3: Run the health check
 cd "$SCRIPT_DIR"
-if python healthcheck.py; then
+if $PYTHON healthcheck.py; then
     echo ""
     echo "[4/4] Health check passed!"
     echo ""
@@ -89,7 +101,7 @@ if python healthcheck.py; then
     echo "       is called on all code paths."
     echo ""
     echo "=============================================="
-    python "$SCRIPT_DIR/../ctf_helper.py" 4 app/server.py
+    $PYTHON "$SCRIPT_DIR/../ctf_helper.py" 4 app/server.py
     exit 0
 else
     echo ""
