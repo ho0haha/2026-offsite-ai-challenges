@@ -42,7 +42,7 @@ def populated_tracker():
         ("2025-01-13", "Chicken Wings", 8.0, "kg", "expired", "KFC"),
         ("2025-01-14", "Pizza Dough", 5.0, "kg", "expired", "Pizza Hut"),
         ("2025-01-14", "Taco Shells", 3.0, "kg", "damaged", "Taco Bell"),
-        ("2025-01-15", "Mashed Potatoes", 4.0, "kg", "overproduction", "KFC"),
+        ("2025-01-15", "Mashed Potatoes", 4.0, "kg", "overproduction", "Pizza Hut"),
         ("2025-01-16", "Cheese", 2.5, "kg", "expired", "Pizza Hut"),
         ("2025-01-17", "Chicken Breast", 7.0, "kg", "expired", "KFC"),
         # Week 3 — even higher waste
