@@ -45,7 +45,7 @@ Once both phases pass, run:
 bash validate.sh
 ```
 
-This will verify your PRD structure and run all implementation tests. If everything passes, you'll receive the flag.
+This will verify your PRD structure and run all implementation tests. If everything passes, your solution is auto-submitted.
 
 ## Files
 

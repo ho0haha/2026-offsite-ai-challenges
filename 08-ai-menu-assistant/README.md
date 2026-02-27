@@ -38,7 +38,7 @@ Run the test suite:
 python test_chatbot.py
 ```
 
-The test sends 10 questions about the menu and checks that your answers contain the correct information. You need to get at least **8 out of 10** correct to earn the flag.
+The test sends 10 questions about the menu and checks that your answers contain the correct information. You need to get at least **8 out of 10** correct — your solution is auto-submitted when you pass.
 
 ## Files
 

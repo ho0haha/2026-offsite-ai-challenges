@@ -22,11 +22,13 @@ if [ -z "$COVERAGE" ]; then
 fi
 
 echo ""
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 echo "============================================"
 if [ "$COVERAGE" -ge 90 ]; then
     echo "Coverage: ${COVERAGE}% (>= 90%)"
     echo ""
-    echo "FLAG{test_factory_90_percent_c0v3rag3}"
+    python "$SCRIPT_DIR/../ctf_helper.py" 6 test_inventory.py
 else
     echo "Coverage: ${COVERAGE}% - Need 90%+ coverage"
     echo "Keep writing tests!"

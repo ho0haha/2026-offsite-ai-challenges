@@ -309,9 +309,20 @@ def test_full_loyalty_flow(setup):
     assert "points" in summary
 
 
-# ---------- FLAG ----------
-def test_flag():
-    """If all tests above pass, this prints the flag."""
+# ---------- Auto-submit ----------
+def test_submit():
+    """If all tests above pass, submit to CTF server."""
     print("\n" + "=" * 50)
-    print("FLAG{context_is_king_l0yalty_p0ints}")
+    print("  ALL TESTS PASSED!")
     print("=" * 50)
+
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+    import ctf_helper
+    ctf_helper.submit(10, [
+        "restaurant_system/config.py",
+        "restaurant_system/customer_service.py",
+        "restaurant_system/order_service.py",
+        "restaurant_system/payment_service.py",
+        "restaurant_system/reporting.py",
+        "restaurant_system/formatters.py",
+    ])

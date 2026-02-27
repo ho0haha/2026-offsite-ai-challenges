@@ -32,11 +32,9 @@ python validate_all.py
 
 All 5 challenges must pass validation to capture the flag.
 
-## Flag
+## Submission
 
-```
-FLAG{prompt_craftsman_5_for_5}
-```
+When all 5 challenges pass, your outputs are auto-submitted to the CTF server.
 
 ## Tips
 

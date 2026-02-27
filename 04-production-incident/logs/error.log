@@ -1,495 +1,314 @@
 2026-02-25 02:14:01,234 INFO app.server: Server starting on 0.0.0.0:8080 with 4 workers
 2026-02-25 02:14:01,235 INFO app.database: Connection pool initialized: min=5, max=20, timeout=5s
 2026-02-25 02:14:01,301 INFO app.server: [req-1740451441301] GET /health from 10.0.1.15
+2026-02-25 02:14:01,302 INFO app.database: Acquired connection 1 from pool (active: 1/20)
 2026-02-25 02:14:01,315 INFO app.server: [req-1740451441301] Health check OK (0.014s)
-2026-02-25 02:14:01,316 INFO app.server: [req-1740451441301] Response: 200
+2026-02-25 02:14:01,316 INFO app.database: Released connection 1 back to pool (active: 0/20)
+2026-02-25 02:14:01,317 INFO app.server: [req-1740451441301] Response: 200
 2026-02-25 02:14:01,402 INFO app.server: [req-1740451441402] GET /api/orders from 10.0.2.44
+2026-02-25 02:14:01,403 INFO app.database: Acquired connection 1 from pool (active: 1/20)
 2026-02-25 02:14:01,418 INFO app.server: [req-1740451441402] Listed 5 orders (0.016s)
-2026-02-25 02:14:01,419 INFO app.server: [req-1740451441402] Response: 200
+2026-02-25 02:14:01,419 INFO app.database: Released connection 1 back to pool (active: 0/20)
+2026-02-25 02:14:01,420 INFO app.server: [req-1740451441402] Response: 200
 2026-02-25 02:14:01,505 INFO app.server: [req-1740451441505] GET /api/orders/42 from 10.0.3.78
-2026-02-25 02:14:01,519 INFO app.server: [req-1740451441505] Fetched order (0.014s)
-2026-02-25 02:14:01,520 INFO app.server: [req-1740451441505] Response: 200
+2026-02-25 02:14:01,506 INFO app.database: Acquired connection 1 from pool (active: 1/20)
+2026-02-25 02:14:01,519 INFO app.server: [req-1740451441505] Fetched order 42 (0.014s)
+2026-02-25 02:14:01,520 INFO app.database: Released connection 1 back to pool (active: 0/20)
+2026-02-25 02:14:01,521 INFO app.server: [req-1740451441505] Response: 200
 2026-02-25 02:14:01,607 INFO app.server: [req-1740451441607] POST /api/orders from 10.0.4.22
-2026-02-25 02:14:01,621 INFO app.server: [req-1740451441607] Created order (0.014s)
-2026-02-25 02:14:01,622 INFO app.server: [req-1740451441607] Response: 201
+2026-02-25 02:14:01,608 INFO app.database: Acquired connection 1 from pool (active: 1/20)
+2026-02-25 02:14:01,621 WARNING app.server: [req-1740451441607] Duplicate order from 10.0.4.22
+2026-02-25 02:14:01,622 INFO app.server: [req-1740451441607] Response: 409
 2026-02-25 02:14:01,710 INFO app.server: [req-1740451441710] GET /health from 10.0.5.91
+2026-02-25 02:14:01,711 INFO app.database: Acquired connection 2 from pool (active: 2/20)
 2026-02-25 02:14:01,724 INFO app.server: [req-1740451441710] Health check OK (0.014s)
-2026-02-25 02:14:01,725 INFO app.server: [req-1740451441710] Response: 200
+2026-02-25 02:14:01,725 INFO app.database: Released connection 2 back to pool (active: 1/20)
+2026-02-25 02:14:01,726 INFO app.server: [req-1740451441710] Response: 200
 2026-02-25 02:14:01,812 INFO app.server: [req-1740451441812] GET /api/orders from 10.0.6.33
+2026-02-25 02:14:01,813 INFO app.database: Acquired connection 2 from pool (active: 2/20)
 2026-02-25 02:14:01,826 INFO app.server: [req-1740451441812] Listed 5 orders (0.014s)
-2026-02-25 02:14:01,827 INFO app.server: [req-1740451441812] Response: 200
+2026-02-25 02:14:01,827 INFO app.database: Released connection 2 back to pool (active: 1/20)
+2026-02-25 02:14:01,828 INFO app.server: [req-1740451441812] Response: 200
 2026-02-25 02:14:01,915 INFO app.server: [req-1740451441915] POST /api/orders from 10.0.7.55
-2026-02-25 02:14:01,929 INFO app.server: [req-1740451441915] Created order (0.014s)
+2026-02-25 02:14:01,916 INFO app.database: Acquired connection 2 from pool (active: 2/20)
+2026-02-25 02:14:01,928 INFO app.server: [req-1740451441915] Created order (0.013s)
+2026-02-25 02:14:01,929 INFO app.database: Released connection 2 back to pool (active: 1/20)
+2026-02-25 02:14:01,929 INFO app.database: Released connection 2 back to pool (active: 0/20)
 2026-02-25 02:14:01,930 INFO app.server: [req-1740451441915] Response: 201
-2026-02-25 02:14:02,018 INFO app.server: [req-1740451442018] GET /api/orders/15 from 10.0.8.101
-2026-02-25 02:14:02,033 INFO app.server: [req-1740451442018] Fetched order (0.015s)
+2026-02-25 02:14:02,018 INFO app.server: [req-1740451442018] DELETE /api/orders/7 from 10.0.8.12
+2026-02-25 02:14:02,019 INFO app.database: Acquired connection 2 from pool (active: 1/20)
+2026-02-25 02:14:02,032 INFO app.server: [req-1740451442018] Deleted order 7 (0.014s)
+2026-02-25 02:14:02,033 INFO app.database: Released connection 2 back to pool (active: 0/20)
 2026-02-25 02:14:02,034 INFO app.server: [req-1740451442018] Response: 200
-2026-02-25 02:14:02,121 INFO app.server: [req-1740451442121] GET /health from 10.0.9.12
-2026-02-25 02:14:02,136 INFO app.server: [req-1740451442121] Health check OK (0.015s)
-2026-02-25 02:14:02,137 INFO app.server: [req-1740451442121] Response: 200
-2026-02-25 02:14:02,224 INFO app.server: [req-1740451442224] GET /api/orders from 10.0.10.200
-2026-02-25 02:14:02,239 INFO app.server: [req-1740451442224] Listed 5 orders (0.015s)
-2026-02-25 02:14:02,240 INFO app.server: [req-1740451442224] Response: 200
-2026-02-25 02:14:02,328 INFO app.server: [req-1740451442328] POST /api/orders from 10.0.11.47
-2026-02-25 02:14:02,343 INFO app.server: [req-1740451442328] Created order (0.015s)
-2026-02-25 02:14:02,344 INFO app.server: [req-1740451442328] Response: 201
-2026-02-25 02:14:02,432 INFO app.server: [req-1740451442432] GET /api/orders/7 from 10.0.12.88
-2026-02-25 02:14:02,447 INFO app.server: [req-1740451442432] Fetched order (0.015s)
-2026-02-25 02:14:02,448 INFO app.server: [req-1740451442432] Response: 200
-2026-02-25 02:14:02,536 INFO app.server: [req-1740451442536] GET /health from 10.0.13.155
-2026-02-25 02:14:02,551 INFO app.server: [req-1740451442536] Health check OK (0.015s)
-2026-02-25 02:14:02,552 INFO app.server: [req-1740451442536] Response: 200
-2026-02-25 02:14:02,640 INFO app.server: [req-1740451442640] GET /api/orders from 10.0.14.63
-2026-02-25 02:14:02,655 INFO app.server: [req-1740451442640] Listed 5 orders (0.015s)
-2026-02-25 02:14:02,656 INFO app.server: [req-1740451442640] Response: 200
-2026-02-25 02:14:02,744 INFO app.server: [req-1740451442744] GET /api/orders/99 from 10.0.15.210
-2026-02-25 02:14:02,759 INFO app.server: [req-1740451442744] Fetched order (0.015s)
-2026-02-25 02:14:02,760 INFO app.server: [req-1740451442744] Response: 200
-2026-02-25 02:14:02,848 INFO app.server: [req-1740451442848] POST /api/orders from 10.0.16.31
-2026-02-25 02:14:02,863 INFO app.server: [req-1740451442848] Created order (0.015s)
-2026-02-25 02:14:02,864 INFO app.server: [req-1740451442848] Response: 201
-2026-02-25 02:14:02,952 INFO app.server: [req-1740451442952] GET /health from 10.0.17.142
-2026-02-25 02:14:02,967 INFO app.server: [req-1740451442952] Health check OK (0.015s)
-2026-02-25 02:14:02,968 INFO app.server: [req-1740451442952] Response: 200
-2026-02-25 02:14:03,056 INFO app.server: [req-1740451443056] GET /api/orders from 10.0.18.77
-2026-02-25 02:14:03,071 INFO app.server: [req-1740451443056] Listed 5 orders (0.015s)
-2026-02-25 02:14:03,072 INFO app.server: [req-1740451443056] Response: 200
-2026-02-25 02:14:03,160 INFO app.server: [req-1740451443160] GET /api/orders/23 from 10.0.19.5
-2026-02-25 02:14:03,175 INFO app.server: [req-1740451443160] Fetched order (0.015s)
-2026-02-25 02:14:03,176 INFO app.server: [req-1740451443160] Response: 200
-2026-02-25 02:14:03,264 INFO app.server: [req-1740451443264] POST /api/orders from 10.0.20.119
-2026-02-25 02:14:03,279 INFO app.server: [req-1740451443264] Created order (0.015s)
-2026-02-25 02:14:03,280 INFO app.server: [req-1740451443264] Response: 201
-2026-02-25 02:14:03,368 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:14:03,369 INFO app.server: [req-1740451443368] GET /health from 10.0.21.66
-2026-02-25 02:14:08,271 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:14:08,272 ERROR app.server: [req-1740451443368] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:14:08,273 INFO app.server: [req-1740451443368] Response: 503
-2026-02-25 02:14:08,361 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:14:08,362 INFO app.server: [req-1740451448361] GET /api/orders from 10.0.22.183
-2026-02-25 02:14:13,264 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:14:13,265 ERROR app.server: [req-1740451448361] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:14:13,266 INFO app.server: [req-1740451448361] Response: 503
-2026-02-25 02:14:13,354 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:14:13,355 INFO app.server: [req-1740451453354] GET /api/orders/51 from 10.0.23.94
-2026-02-25 02:14:18,258 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:14:18,259 ERROR app.server: [req-1740451453354] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:14:18,260 INFO app.server: [req-1740451453354] Response: 503
-2026-02-25 02:14:18,348 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:14:18,349 INFO app.server: [req-1740451458348] POST /api/orders from 10.0.24.207
-2026-02-25 02:14:23,251 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:14:23,252 ERROR app.server: [req-1740451458348] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:14:23,253 INFO app.server: [req-1740451458348] Response: 503
-2026-02-25 02:14:23,341 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:14:23,342 INFO app.server: [req-1740451463341] GET /health from 10.0.25.38
-2026-02-25 02:14:28,244 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:14:28,245 ERROR app.server: [req-1740451463341] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:14:28,246 ERROR app.server: [req-1740451463341] HEALTH CHECK FAILED
-2026-02-25 02:14:28,247 INFO app.server: [req-1740451463341] Response: 503
-2026-02-25 02:14:28,335 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:14:28,336 INFO app.server: [req-1740451468335] GET /api/orders from 10.0.26.150
-2026-02-25 02:14:33,238 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:14:33,239 ERROR app.server: [req-1740451468335] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:14:33,240 INFO app.server: [req-1740451468335] Response: 503
-2026-02-25 02:14:33,328 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:14:33,329 INFO app.server: [req-1740451473328] GET /api/orders/33 from 10.0.27.62
-2026-02-25 02:14:38,231 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:14:38,232 ERROR app.server: [req-1740451473328] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:14:38,233 INFO app.server: [req-1740451473328] Response: 503
-2026-02-25 02:14:38,321 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:14:38,322 INFO app.server: [req-1740451478321] POST /api/orders from 10.0.28.175
-2026-02-25 02:14:43,224 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:14:43,225 ERROR app.server: [req-1740451478321] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:14:43,226 INFO app.server: [req-1740451478321] Response: 503
-2026-02-25 02:14:43,314 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:14:43,315 INFO app.server: [req-1740451483314] GET /health from 10.0.29.8
-2026-02-25 02:14:48,217 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:14:48,218 ERROR app.server: [req-1740451483314] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:14:48,219 ERROR app.server: [req-1740451483314] HEALTH CHECK FAILED
-2026-02-25 02:14:48,220 INFO app.server: [req-1740451483314] Response: 503
-2026-02-25 02:14:48,308 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:14:48,309 INFO app.server: [req-1740451488308] GET /api/orders from 10.0.30.121
-2026-02-25 02:14:53,211 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:14:53,212 ERROR app.server: [req-1740451488308] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:14:53,213 INFO app.server: [req-1740451488308] Response: 503
-2026-02-25 02:14:53,301 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:14:53,302 INFO app.server: [req-1740451493301] POST /api/orders from 10.0.31.245
-2026-02-25 02:14:58,204 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:14:58,205 ERROR app.server: [req-1740451493301] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:14:58,206 INFO app.server: [req-1740451493301] Response: 503
-2026-02-25 02:14:58,294 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:14:58,295 INFO app.server: [req-1740451498294] GET /api/orders/88 from 10.0.32.56
-2026-02-25 02:15:03,197 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:15:03,198 ERROR app.server: [req-1740451498294] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:15:03,199 INFO app.server: [req-1740451498294] Response: 503
-2026-02-25 02:15:03,287 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:15:03,288 INFO app.server: [req-1740451503287] GET /health from 10.0.33.169
-2026-02-25 02:15:08,190 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:15:08,191 ERROR app.server: [req-1740451503287] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:15:08,192 ERROR app.server: [req-1740451503287] HEALTH CHECK FAILED
-2026-02-25 02:15:08,193 INFO app.server: [req-1740451503287] Response: 503
-2026-02-25 02:15:08,194 CRITICAL app.server: === ALERT: Health check has failed 3 consecutive times ===
-2026-02-25 02:15:08,195 CRITICAL app.server: === PagerDuty incident triggered: INC-20260225-001 ===
-2026-02-25 02:15:08,196 CRITICAL app.server: Pool stats: {'total_created': 20, 'active_connections': 20, 'pool_size': 0, 'max_size': 20, 'available': 0}
-2026-02-25 02:15:08,281 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:15:08,282 INFO app.server: [req-1740451508281] GET /api/orders from 10.0.34.83
-2026-02-25 02:15:13,184 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:15:13,185 ERROR app.server: [req-1740451508281] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:15:13,186 INFO app.server: [req-1740451508281] Response: 503
-2026-02-25 02:15:13,274 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:15:13,275 INFO app.server: [req-1740451513274] GET /api/orders/12 from 10.0.35.197
-2026-02-25 02:15:18,177 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:15:18,178 ERROR app.server: [req-1740451513274] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:15:18,179 INFO app.server: [req-1740451513274] Response: 503
-2026-02-25 02:15:18,267 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:15:18,268 INFO app.server: [req-1740451518267] POST /api/orders from 10.0.36.14
-2026-02-25 02:15:23,170 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:15:23,171 ERROR app.server: [req-1740451518267] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:15:23,172 INFO app.server: [req-1740451518267] Response: 503
-2026-02-25 02:15:23,260 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:15:23,261 INFO app.server: [req-1740451523260] GET /health from 10.0.37.128
-2026-02-25 02:15:28,163 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:15:28,164 ERROR app.server: [req-1740451523260] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:15:28,165 ERROR app.server: [req-1740451523260] HEALTH CHECK FAILED
-2026-02-25 02:15:28,166 INFO app.server: [req-1740451523260] Response: 503
-2026-02-25 02:15:28,254 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:15:28,255 INFO app.server: [req-1740451528254] GET /api/orders from 10.0.38.41
-2026-02-25 02:15:33,157 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:15:33,158 ERROR app.server: [req-1740451528254] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:15:33,159 INFO app.server: [req-1740451528254] Response: 503
-2026-02-25 02:15:33,247 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:15:33,248 INFO app.server: [req-1740451533247] GET /api/orders/67 from 10.0.39.222
-2026-02-25 02:15:38,150 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:15:38,151 ERROR app.server: [req-1740451533247] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:15:38,152 INFO app.server: [req-1740451533247] Response: 503
-2026-02-25 02:15:38,153 ERROR app.server: Traceback (most recent call last):
-2026-02-25 02:15:38,154 ERROR app.server:   File "/app/server.py", line 87, in handle_request
-2026-02-25 02:15:38,155 ERROR app.server:     conn = db_pool.get_connection()
-2026-02-25 02:15:38,156 ERROR app.server:   File "/app/database.py", line 119, in get_connection
-2026-02-25 02:15:38,157 ERROR app.server:     raise ConnectionPoolExhausted(
-2026-02-25 02:15:38,158 ERROR app.server: app.database.ConnectionPoolExhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:15:38,246 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:15:38,247 INFO app.server: [req-1740451538246] POST /api/orders from 10.0.40.135
-2026-02-25 02:15:43,149 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:15:43,150 ERROR app.server: [req-1740451538246] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:15:43,151 INFO app.server: [req-1740451538246] Response: 503
-2026-02-25 02:15:43,239 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:15:43,240 INFO app.server: [req-1740451543239] GET /health from 10.0.41.70
-2026-02-25 02:15:48,142 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:15:48,143 ERROR app.server: [req-1740451543239] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:15:48,144 ERROR app.server: [req-1740451543239] HEALTH CHECK FAILED
-2026-02-25 02:15:48,145 INFO app.server: [req-1740451543239] Response: 503
-2026-02-25 02:15:48,233 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:15:48,234 INFO app.server: [req-1740451548233] GET /api/orders from 10.0.42.188
-2026-02-25 02:15:53,136 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:15:53,137 ERROR app.server: [req-1740451548233] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:15:53,138 INFO app.server: [req-1740451548233] Response: 503
-2026-02-25 02:15:53,226 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:15:53,227 INFO app.server: [req-1740451553226] GET /api/orders/5 from 10.0.43.103
-2026-02-25 02:15:58,129 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:15:58,130 ERROR app.server: [req-1740451553226] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:15:58,131 INFO app.server: [req-1740451553226] Response: 503
-2026-02-25 02:15:58,219 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:15:58,220 INFO app.server: [req-1740451558219] POST /api/orders from 10.0.44.240
-2026-02-25 02:16:03,122 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:16:03,123 ERROR app.server: [req-1740451558219] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:03,124 INFO app.server: [req-1740451558219] Response: 503
-2026-02-25 02:16:03,125 ERROR app.server: Traceback (most recent call last):
-2026-02-25 02:16:03,126 ERROR app.server:   File "/app/server.py", line 87, in handle_request
-2026-02-25 02:16:03,127 ERROR app.server:     conn = db_pool.get_connection()
-2026-02-25 02:16:03,128 ERROR app.server:   File "/app/database.py", line 119, in get_connection
-2026-02-25 02:16:03,129 ERROR app.server:     raise ConnectionPoolExhausted(
-2026-02-25 02:16:03,130 ERROR app.server: app.database.ConnectionPoolExhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:03,218 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:16:03,219 INFO app.server: [req-1740451563218] GET /health from 10.0.45.17
-2026-02-25 02:16:08,121 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:16:08,122 ERROR app.server: [req-1740451563218] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:08,123 ERROR app.server: [req-1740451563218] HEALTH CHECK FAILED
-2026-02-25 02:16:08,124 INFO app.server: [req-1740451563218] Response: 503
-2026-02-25 02:16:08,125 CRITICAL app.server: === ALERT: Health check has failed 6 consecutive times ===
-2026-02-25 02:16:08,126 CRITICAL app.server: === System is DOWN. All 20 connections in use, 0 available ===
-2026-02-25 02:16:08,127 CRITICAL app.server: === On-call engineer paged: SEV-1 incident ===
-2026-02-25 02:16:08,215 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:16:08,216 INFO app.server: [req-1740451568215] GET /api/orders from 10.0.46.159
-2026-02-25 02:16:13,118 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:16:13,119 ERROR app.server: [req-1740451568215] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:13,120 INFO app.server: [req-1740451568215] Response: 503
-2026-02-25 02:16:13,208 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:16:13,209 INFO app.server: [req-1740451573208] GET /api/orders/44 from 10.0.47.73
-2026-02-25 02:16:18,111 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:16:18,112 ERROR app.server: [req-1740451573208] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:18,113 INFO app.server: [req-1740451573208] Response: 503
-2026-02-25 02:16:18,201 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:16:18,202 INFO app.server: [req-1740451578201] POST /api/orders from 10.0.48.186
-2026-02-25 02:16:23,104 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:16:23,105 ERROR app.server: [req-1740451578201] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:23,106 INFO app.server: [req-1740451578201] Response: 503
-2026-02-25 02:16:23,194 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:16:23,195 INFO app.server: [req-1740451583194] GET /health from 10.0.49.100
-2026-02-25 02:16:28,097 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:16:28,098 ERROR app.server: [req-1740451583194] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:28,099 ERROR app.server: [req-1740451583194] HEALTH CHECK FAILED
-2026-02-25 02:16:28,100 INFO app.server: [req-1740451583194] Response: 503
-2026-02-25 02:16:28,188 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:16:28,189 INFO app.server: [req-1740451588188] GET /api/orders from 10.0.50.215
-2026-02-25 02:16:33,091 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:16:33,092 ERROR app.server: [req-1740451588188] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:33,093 INFO app.server: [req-1740451588188] Response: 503
-2026-02-25 02:16:33,181 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:16:33,182 INFO app.server: [req-1740451593181] GET /api/orders/76 from 10.0.51.30
-2026-02-25 02:16:38,084 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:16:38,085 ERROR app.server: [req-1740451593181] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:38,086 INFO app.server: [req-1740451593181] Response: 503
-2026-02-25 02:16:38,087 ERROR app.server: Traceback (most recent call last):
-2026-02-25 02:16:38,088 ERROR app.server:   File "/app/server.py", line 87, in handle_request
-2026-02-25 02:16:38,089 ERROR app.server:     conn = db_pool.get_connection()
-2026-02-25 02:16:38,090 ERROR app.server:   File "/app/database.py", line 119, in get_connection
-2026-02-25 02:16:38,091 ERROR app.server:     raise ConnectionPoolExhausted(
-2026-02-25 02:16:38,092 ERROR app.server: app.database.ConnectionPoolExhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:38,180 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:16:38,181 INFO app.server: [req-1740451598180] POST /api/orders from 10.0.52.143
-2026-02-25 02:16:43,083 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:16:43,084 ERROR app.server: [req-1740451598180] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:43,085 INFO app.server: [req-1740451598180] Response: 503
-2026-02-25 02:16:43,173 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:16:43,174 INFO app.server: [req-1740451603173] GET /health from 10.0.53.58
-2026-02-25 02:16:48,076 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:16:48,077 ERROR app.server: [req-1740451603173] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:48,078 ERROR app.server: [req-1740451603173] HEALTH CHECK FAILED
-2026-02-25 02:16:48,079 INFO app.server: [req-1740451603173] Response: 503
-2026-02-25 02:16:48,167 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:16:48,168 INFO app.server: [req-1740451608167] GET /api/orders from 10.0.54.171
-2026-02-25 02:16:53,070 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:16:53,071 ERROR app.server: [req-1740451608167] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:53,072 INFO app.server: [req-1740451608167] Response: 503
-2026-02-25 02:16:53,160 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:16:53,161 INFO app.server: [req-1740451613160] GET /api/orders/91 from 10.0.55.84
-2026-02-25 02:16:58,063 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:16:58,064 ERROR app.server: [req-1740451613160] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:16:58,065 INFO app.server: [req-1740451613160] Response: 503
-2026-02-25 02:16:58,153 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:16:58,154 INFO app.server: [req-1740451618153] POST /api/orders from 10.0.56.196
-2026-02-25 02:17:03,056 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:17:03,057 ERROR app.server: [req-1740451618153] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:17:03,058 INFO app.server: [req-1740451618153] Response: 503
-2026-02-25 02:17:03,146 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:17:03,147 INFO app.server: [req-1740451623146] GET /health from 10.0.57.11
-2026-02-25 02:17:08,049 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:17:08,050 ERROR app.server: [req-1740451623146] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:17:08,051 ERROR app.server: [req-1740451623146] HEALTH CHECK FAILED
-2026-02-25 02:17:08,052 INFO app.server: [req-1740451623146] Response: 503
-2026-02-25 02:17:08,053 CRITICAL app.server: === ALERT: Health check has failed 9 consecutive times ===
-2026-02-25 02:17:08,054 CRITICAL app.server: === Connection leak detected: 20 connections acquired, 0 released ===
-2026-02-25 02:17:08,055 CRITICAL app.server: === Server is unrecoverable without restart or fix ===
-2026-02-25 02:17:08,056 CRITICAL app.server: Pool stats: {'total_created': 20, 'active_connections': 20, 'pool_size': 0, 'max_size': 20, 'available': 0}
-2026-02-25 02:17:08,144 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:17:08,145 INFO app.server: [req-1740451628144] GET /api/orders from 10.0.58.124
-2026-02-25 02:17:13,047 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:17:13,048 ERROR app.server: [req-1740451628144] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:17:13,049 INFO app.server: [req-1740451628144] Response: 503
-2026-02-25 02:17:13,137 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:17:13,138 INFO app.server: [req-1740451633137] GET /api/orders/19 from 10.0.59.237
-2026-02-25 02:17:18,040 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:17:18,041 ERROR app.server: [req-1740451633137] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:17:18,042 INFO app.server: [req-1740451633137] Response: 503
-2026-02-25 02:17:18,130 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:17:18,131 INFO app.server: [req-1740451638130] POST /api/orders from 10.0.60.52
-2026-02-25 02:17:23,033 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:17:23,034 ERROR app.server: [req-1740451638130] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:17:23,035 INFO app.server: [req-1740451638130] Response: 503
-2026-02-25 02:17:23,123 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:17:23,124 INFO app.server: [req-1740451643123] GET /health from 10.0.61.165
-2026-02-25 02:17:28,026 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:17:28,027 ERROR app.server: [req-1740451643123] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:17:28,028 ERROR app.server: [req-1740451643123] HEALTH CHECK FAILED
-2026-02-25 02:17:28,029 INFO app.server: [req-1740451643123] Response: 503
-2026-02-25 02:17:28,117 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:17:28,118 INFO app.server: [req-1740451648117] GET /api/orders from 10.0.62.78
-2026-02-25 02:17:33,020 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:17:33,021 ERROR app.server: [req-1740451648117] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:17:33,022 INFO app.server: [req-1740451648117] Response: 503
-2026-02-25 02:17:33,110 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:17:33,111 INFO app.server: [req-1740451653110] GET /api/orders/58 from 10.0.63.191
-2026-02-25 02:17:38,013 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:17:38,014 ERROR app.server: [req-1740451653110] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:17:38,015 INFO app.server: [req-1740451653110] Response: 503
-2026-02-25 02:17:38,016 ERROR app.server: Traceback (most recent call last):
-2026-02-25 02:17:38,017 ERROR app.server:   File "/app/server.py", line 87, in handle_request
-2026-02-25 02:17:38,018 ERROR app.server:     conn = db_pool.get_connection()
-2026-02-25 02:17:38,019 ERROR app.server:   File "/app/database.py", line 119, in get_connection
-2026-02-25 02:17:38,020 ERROR app.server:     raise ConnectionPoolExhausted(
-2026-02-25 02:17:38,021 ERROR app.server: app.database.ConnectionPoolExhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:17:38,109 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:17:38,110 INFO app.server: [req-1740451658109] POST /api/orders from 10.0.64.105
-2026-02-25 02:17:43,012 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:17:43,013 ERROR app.server: [req-1740451658109] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:17:43,014 INFO app.server: [req-1740451658109] Response: 503
-2026-02-25 02:17:43,102 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:17:43,103 INFO app.server: [req-1740451663102] GET /health from 10.0.65.218
-2026-02-25 02:17:48,005 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:17:48,006 ERROR app.server: [req-1740451663102] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:17:48,007 ERROR app.server: [req-1740451663102] HEALTH CHECK FAILED
-2026-02-25 02:17:48,008 INFO app.server: [req-1740451663102] Response: 503
-2026-02-25 02:17:48,009 CRITICAL app.server: === ALERT: Health check has failed 12 consecutive times ===
-2026-02-25 02:17:48,010 CRITICAL app.server: === Automatic restart attempted but pool still exhausted ===
-2026-02-25 02:17:48,011 CRITICAL app.server: === Root cause appears to be connection leak in request handler ===
-2026-02-25 02:17:48,012 CRITICAL app.server: Pool stats: {'total_created': 20, 'active_connections': 20, 'pool_size': 0, 'max_size': 20, 'available': 0}
-2026-02-25 02:17:48,100 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:17:48,101 INFO app.server: [req-1740451668100] GET /api/orders from 10.0.66.33
-2026-02-25 02:17:53,003 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:17:53,004 ERROR app.server: [req-1740451668100] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:17:53,005 INFO app.server: [req-1740451668100] Response: 503
-2026-02-25 02:17:53,093 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:17:53,094 INFO app.server: [req-1740451673093] POST /api/orders from 10.0.67.146
-2026-02-25 02:17:58,006 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:17:58,007 ERROR app.server: [req-1740451673093] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:17:58,008 INFO app.server: [req-1740451673093] Response: 503
-2026-02-25 02:17:58,096 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:17:58,097 INFO app.server: [req-1740451678096] GET /api/orders/27 from 10.0.68.59
-2026-02-25 02:18:02,999 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:18:03,000 ERROR app.server: [req-1740451678096] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:03,001 INFO app.server: [req-1740451678096] Response: 503
-2026-02-25 02:18:03,089 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:18:03,090 INFO app.server: [req-1740451683089] GET /health from 10.0.69.172
-2026-02-25 02:18:07,992 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:18:07,993 ERROR app.server: [req-1740451683089] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:07,994 ERROR app.server: [req-1740451683089] HEALTH CHECK FAILED
-2026-02-25 02:18:07,995 INFO app.server: [req-1740451683089] Response: 503
-2026-02-25 02:18:08,083 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:18:08,084 INFO app.server: [req-1740451688083] GET /api/orders from 10.0.70.85
-2026-02-25 02:18:12,986 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:18:12,987 ERROR app.server: [req-1740451688083] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:12,988 INFO app.server: [req-1740451688083] Response: 503
-2026-02-25 02:18:13,076 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:18:13,077 INFO app.server: [req-1740451693076] GET /api/orders/73 from 10.0.71.198
-2026-02-25 02:18:17,979 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:18:17,980 ERROR app.server: [req-1740451693076] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:17,981 INFO app.server: [req-1740451693076] Response: 503
-2026-02-25 02:18:17,982 ERROR app.server: Traceback (most recent call last):
-2026-02-25 02:18:17,983 ERROR app.server:   File "/app/server.py", line 87, in handle_request
-2026-02-25 02:18:17,984 ERROR app.server:     conn = db_pool.get_connection()
-2026-02-25 02:18:17,985 ERROR app.server:   File "/app/database.py", line 119, in get_connection
-2026-02-25 02:18:17,986 ERROR app.server:     raise ConnectionPoolExhausted(
-2026-02-25 02:18:17,987 ERROR app.server: app.database.ConnectionPoolExhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:18,075 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:18:18,076 INFO app.server: [req-1740451698075] POST /api/orders from 10.0.72.111
-2026-02-25 02:18:22,978 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:18:22,979 ERROR app.server: [req-1740451698075] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:22,980 INFO app.server: [req-1740451698075] Response: 503
-2026-02-25 02:18:23,068 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:18:23,069 INFO app.server: [req-1740451703068] GET /health from 10.0.73.24
-2026-02-25 02:18:27,971 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:18:27,972 ERROR app.server: [req-1740451703068] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:27,973 ERROR app.server: [req-1740451703068] HEALTH CHECK FAILED
-2026-02-25 02:18:27,974 INFO app.server: [req-1740451703068] Response: 503
-2026-02-25 02:18:27,975 CRITICAL app.server: === ALERT: Health check has failed 15 consecutive times ===
-2026-02-25 02:18:27,976 CRITICAL app.server: === Automatic restart attempted but pool still exhausted ===
-2026-02-25 02:18:27,977 CRITICAL app.server: Pool stats: {'total_created': 20, 'active_connections': 20, 'pool_size': 0, 'max_size': 20, 'available': 0}
-2026-02-25 02:18:28,065 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:18:28,066 INFO app.server: [req-1740451708065] GET /api/orders from 10.0.74.137
-2026-02-25 02:18:32,968 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:18:32,969 ERROR app.server: [req-1740451708065] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:32,970 INFO app.server: [req-1740451708065] Response: 503
-2026-02-25 02:18:33,058 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:18:33,059 INFO app.server: [req-1740451713058] GET /api/orders/36 from 10.0.75.250
-2026-02-25 02:18:37,961 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:18:37,962 ERROR app.server: [req-1740451713058] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:37,963 INFO app.server: [req-1740451713058] Response: 503
-2026-02-25 02:18:38,051 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:18:38,052 INFO app.server: [req-1740451718051] POST /api/orders from 10.0.76.63
-2026-02-25 02:18:42,954 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:18:42,955 ERROR app.server: [req-1740451718051] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:42,956 INFO app.server: [req-1740451718051] Response: 503
-2026-02-25 02:18:43,044 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:18:43,045 INFO app.server: [req-1740451723044] GET /health from 10.0.77.176
-2026-02-25 02:18:47,947 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:18:47,948 ERROR app.server: [req-1740451723044] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:47,949 ERROR app.server: [req-1740451723044] HEALTH CHECK FAILED
-2026-02-25 02:18:47,950 INFO app.server: [req-1740451723044] Response: 503
-2026-02-25 02:18:48,038 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:18:48,039 INFO app.server: [req-1740451728038] GET /api/orders from 10.0.78.89
-2026-02-25 02:18:52,941 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:18:52,942 ERROR app.server: [req-1740451728038] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:52,943 INFO app.server: [req-1740451728038] Response: 503
-2026-02-25 02:18:53,031 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:18:53,032 INFO app.server: [req-1740451733031] GET /api/orders/82 from 10.0.79.202
-2026-02-25 02:18:57,934 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:18:57,935 ERROR app.server: [req-1740451733031] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:57,936 INFO app.server: [req-1740451733031] Response: 503
-2026-02-25 02:18:57,937 ERROR app.server: Traceback (most recent call last):
-2026-02-25 02:18:57,938 ERROR app.server:   File "/app/server.py", line 87, in handle_request
-2026-02-25 02:18:57,939 ERROR app.server:     conn = db_pool.get_connection()
-2026-02-25 02:18:57,940 ERROR app.server:   File "/app/database.py", line 119, in get_connection
-2026-02-25 02:18:57,941 ERROR app.server:     raise ConnectionPoolExhausted(
-2026-02-25 02:18:57,942 ERROR app.server: app.database.ConnectionPoolExhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:18:58,030 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:18:58,031 INFO app.server: [req-1740451738030] POST /api/orders from 10.0.80.15
-2026-02-25 02:19:02,933 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:19:02,934 ERROR app.server: [req-1740451738030] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:19:02,935 INFO app.server: [req-1740451738030] Response: 503
-2026-02-25 02:19:03,023 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:19:03,024 INFO app.server: [req-1740451743023] GET /health from 10.0.81.128
-2026-02-25 02:19:07,926 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:19:07,927 ERROR app.server: [req-1740451743023] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:19:07,928 ERROR app.server: [req-1740451743023] HEALTH CHECK FAILED
-2026-02-25 02:19:07,929 INFO app.server: [req-1740451743023] Response: 503
-2026-02-25 02:19:07,930 CRITICAL app.server: === ALERT: Health check has failed 18 consecutive times ===
-2026-02-25 02:19:07,931 CRITICAL app.server: === All remediation attempts failed ===
-2026-02-25 02:19:07,932 CRITICAL app.server: === Connection leak confirmed: connections acquired but NEVER released ===
-2026-02-25 02:19:07,933 CRITICAL app.server: Pool stats: {'total_created': 20, 'active_connections': 20, 'pool_size': 0, 'max_size': 20, 'available': 0}
-2026-02-25 02:19:07,934 CRITICAL app.server: === Escalating to engineering. Server requires code fix. ===
-2026-02-25 02:19:08,022 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:19:08,023 INFO app.server: [req-1740451748022] GET /api/orders from 10.0.82.241
-2026-02-25 02:19:12,925 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:19:12,926 ERROR app.server: [req-1740451748022] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:19:12,927 INFO app.server: [req-1740451748022] Response: 503
-2026-02-25 02:19:13,015 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:19:13,016 INFO app.server: [req-1740451753015] GET /api/orders/11 from 10.0.83.54
-2026-02-25 02:19:17,918 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:19:17,919 ERROR app.server: [req-1740451753015] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:19:17,920 INFO app.server: [req-1740451753015] Response: 503
-2026-02-25 02:19:18,008 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:19:18,009 INFO app.server: [req-1740451758008] POST /api/orders from 10.0.84.167
-2026-02-25 02:19:22,911 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:19:22,912 ERROR app.server: [req-1740451758008] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:19:22,913 INFO app.server: [req-1740451758008] Response: 503
-2026-02-25 02:19:23,001 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:19:23,002 INFO app.server: [req-1740451763001] GET /health from 10.0.85.80
-2026-02-25 02:19:27,904 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:19:27,905 ERROR app.server: [req-1740451763001] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:19:27,906 ERROR app.server: [req-1740451763001] HEALTH CHECK FAILED
-2026-02-25 02:19:27,907 INFO app.server: [req-1740451763001] Response: 503
-2026-02-25 02:19:27,995 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:19:27,996 INFO app.server: [req-1740451767995] GET /api/orders from 10.0.86.193
-2026-02-25 02:19:32,898 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:19:32,899 ERROR app.server: [req-1740451767995] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:19:32,900 INFO app.server: [req-1740451767995] Response: 503
-2026-02-25 02:19:32,988 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:19:32,989 INFO app.server: [req-1740451772988] GET /api/orders/48 from 10.0.87.6
-2026-02-25 02:19:37,891 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:19:37,892 ERROR app.server: [req-1740451772988] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:19:37,893 INFO app.server: [req-1740451772988] Response: 503
-2026-02-25 02:19:37,981 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:19:37,982 INFO app.server: [req-1740451777981] POST /api/orders from 10.0.88.119
-2026-02-25 02:19:42,884 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:19:42,885 ERROR app.server: [req-1740451777981] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:19:42,886 INFO app.server: [req-1740451777981] Response: 503
-2026-02-25 02:19:42,887 ERROR app.server: Traceback (most recent call last):
-2026-02-25 02:19:42,888 ERROR app.server:   File "/app/server.py", line 87, in handle_request
-2026-02-25 02:19:42,889 ERROR app.server:     conn = db_pool.get_connection()
-2026-02-25 02:19:42,890 ERROR app.server:   File "/app/database.py", line 119, in get_connection
-2026-02-25 02:19:42,891 ERROR app.server:     raise ConnectionPoolExhausted(
-2026-02-25 02:19:42,892 ERROR app.server: app.database.ConnectionPoolExhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:19:42,980 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
-2026-02-25 02:19:42,981 INFO app.server: [req-1740451782980] GET /health from 10.0.89.232
-2026-02-25 02:19:47,883 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
-2026-02-25 02:19:47,884 ERROR app.server: [req-1740451782980] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
-2026-02-25 02:19:47,885 ERROR app.server: [req-1740451782980] HEALTH CHECK FAILED
-2026-02-25 02:19:47,886 INFO app.server: [req-1740451782980] Response: 503
-2026-02-25 02:19:47,887 CRITICAL app.server: === ALERT: Health check has failed 21 consecutive times ===
-2026-02-25 02:19:47,888 CRITICAL app.server: === SERVER IS DOWN - SEV-1 INCIDENT INC-20260225-001 ===
-2026-02-25 02:19:47,889 CRITICAL app.server: === Connection pool completely exhausted: 20/20 in use, 0 available ===
-2026-02-25 02:19:47,890 CRITICAL app.server: === No connections have been returned to the pool since startup ===
-2026-02-25 02:19:47,891 CRITICAL app.server: === Likely cause: missing release_connection() call in request handler ===
-2026-02-25 02:19:47,892 CRITICAL app.server: Pool stats: {'total_created': 20, 'active_connections': 20, 'pool_size': 0, 'max_size': 20, 'available': 0}
-2026-02-25 02:19:47,893 CRITICAL app.server: === Server shutting down. Manual intervention required. ===
+2026-02-25 02:14:02,120 INFO app.server: [req-1740451442120] GET /api/orders/15 from 10.0.9.88
+2026-02-25 02:14:02,121 INFO app.database: Acquired connection 2 from pool (active: 1/20)
+2026-02-25 02:14:02,134 INFO app.server: [req-1740451442120] Fetched order 15 (0.014s)
+2026-02-25 02:14:02,135 INFO app.database: Released connection 2 back to pool (active: 0/20)
+2026-02-25 02:14:02,136 INFO app.server: [req-1740451442120] Response: 200
+2026-02-25 02:14:02,222 INFO app.server: [req-1740451442222] PUT /api/orders/3 from 10.0.10.44
+2026-02-25 02:14:02,223 INFO app.database: Acquired connection 2 from pool (active: 1/20)
+2026-02-25 02:14:02,236 INFO app.server: [req-1740451442222] Updated order 3 (0.014s)
+2026-02-25 02:14:02,237 INFO app.database: Released connection 2 back to pool (active: 0/20)
+2026-02-25 02:14:02,238 INFO app.server: [req-1740451442222] Response: 200
+2026-02-25 02:14:02,325 INFO app.server: [req-1740451442325] POST /api/orders from 10.0.11.67
+2026-02-25 02:14:02,326 INFO app.database: Acquired connection 2 from pool (active: 1/20)
+2026-02-25 02:14:02,339 WARNING app.server: [req-1740451442325] Duplicate order from 10.0.11.67
+2026-02-25 02:14:02,340 INFO app.server: [req-1740451442325] Response: 409
+2026-02-25 02:14:02,428 INFO app.server: [req-1740451442428] GET /health from 10.0.12.33
+2026-02-25 02:14:02,429 INFO app.database: Acquired connection 3 from pool (active: 3/20)
+2026-02-25 02:14:02,442 INFO app.server: [req-1740451442428] Health check OK (0.014s)
+2026-02-25 02:14:02,443 INFO app.database: Released connection 3 back to pool (active: 2/20)
+2026-02-25 02:14:02,444 INFO app.server: [req-1740451442428] Response: 200
+2026-02-25 02:14:02,530 INFO app.server: [req-1740451442530] GET /api/orders from 10.0.13.91
+2026-02-25 02:14:02,531 INFO app.database: Acquired connection 3 from pool (active: 3/20)
+2026-02-25 02:14:02,544 INFO app.server: [req-1740451442530] Listed 5 orders (0.014s)
+2026-02-25 02:14:02,545 INFO app.database: Released connection 3 back to pool (active: 2/20)
+2026-02-25 02:14:02,546 INFO app.server: [req-1740451442530] Response: 200
+2026-02-25 02:14:02,633 INFO app.server: [req-1740451442633] GET /api/orders/99 from 10.0.14.22
+2026-02-25 02:14:02,634 INFO app.database: Acquired connection 3 from pool (active: 3/20)
+2026-02-25 02:14:02,647 INFO app.server: [req-1740451442633] Fetched order 99 (0.014s)
+2026-02-25 02:14:02,648 INFO app.database: Released connection 3 back to pool (active: 2/20)
+2026-02-25 02:14:02,649 INFO app.server: [req-1740451442633] Response: 200
+2026-02-25 02:14:02,735 INFO app.server: [req-1740451442735] POST /api/orders from 10.0.15.78
+2026-02-25 02:14:02,736 INFO app.database: Acquired connection 3 from pool (active: 3/20)
+2026-02-25 02:14:02,748 WARNING app.server: [req-1740451442735] Duplicate order from 10.0.15.78
+2026-02-25 02:14:02,749 INFO app.server: [req-1740451442735] Response: 409
+2026-02-25 02:14:02,836 INFO app.server: [req-1740451442836] GET /health from 10.0.16.55
+2026-02-25 02:14:02,837 INFO app.database: Acquired connection 4 from pool (active: 4/20)
+2026-02-25 02:14:02,850 INFO app.server: [req-1740451442836] Health check OK (0.014s)
+2026-02-25 02:14:02,851 INFO app.database: Released connection 4 back to pool (active: 3/20)
+2026-02-25 02:14:02,852 INFO app.server: [req-1740451442836] Response: 200
+2026-02-25 02:14:02,938 INFO app.server: [req-1740451442938] PUT /api/orders/11 from 10.0.17.33
+2026-02-25 02:14:02,939 INFO app.database: Acquired connection 4 from pool (active: 4/20)
+2026-02-25 02:14:02,952 INFO app.server: [req-1740451442938] Updated order 11 (0.014s)
+2026-02-25 02:14:02,953 INFO app.database: Released connection 4 back to pool (active: 3/20)
+2026-02-25 02:14:02,954 INFO app.server: [req-1740451442938] Response: 200
+2026-02-25 02:14:03,040 INFO app.server: [req-1740451443040] GET /api/orders from 10.0.18.12
+2026-02-25 02:14:03,041 INFO app.database: Acquired connection 4 from pool (active: 4/20)
+2026-02-25 02:14:03,054 INFO app.server: [req-1740451443040] Listed 5 orders (0.014s)
+2026-02-25 02:14:03,055 INFO app.database: Released connection 4 back to pool (active: 3/20)
+2026-02-25 02:14:03,056 INFO app.server: [req-1740451443040] Response: 200
+2026-02-25 02:14:03,143 INFO app.server: [req-1740451443143] POST /api/orders from 10.0.19.67
+2026-02-25 02:14:03,144 INFO app.database: Acquired connection 4 from pool (active: 4/20)
+2026-02-25 02:14:03,156 WARNING app.server: [req-1740451443143] Duplicate order from 10.0.19.67
+2026-02-25 02:14:03,157 INFO app.server: [req-1740451443143] Response: 409
+2026-02-25 02:14:03,244 INFO app.server: [req-1740451443244] GET /api/orders/5 from 10.0.20.88
+2026-02-25 02:14:03,245 INFO app.database: Acquired connection 5 from pool (active: 5/20)
+2026-02-25 02:14:03,258 INFO app.server: [req-1740451443244] Fetched order 5 (0.014s)
+2026-02-25 02:14:03,259 INFO app.database: Released connection 5 back to pool (active: 4/20)
+2026-02-25 02:14:03,260 INFO app.server: [req-1740451443244] Response: 200
+2026-02-25 02:14:03,347 INFO app.server: [req-1740451443347] DELETE /api/orders/22 from 10.0.21.44
+2026-02-25 02:14:03,348 INFO app.database: Acquired connection 5 from pool (active: 5/20)
+2026-02-25 02:14:03,361 INFO app.server: [req-1740451443347] Deleted order 22 (0.014s)
+2026-02-25 02:14:03,362 INFO app.database: Released connection 5 back to pool (active: 4/20)
+2026-02-25 02:14:03,363 INFO app.server: [req-1740451443347] Response: 200
+2026-02-25 02:14:03,450 INFO app.server: [req-1740451443450] POST /api/orders from 10.0.22.15
+2026-02-25 02:14:03,451 INFO app.database: Acquired connection 5 from pool (active: 5/20)
+2026-02-25 02:14:03,463 INFO app.server: [req-1740451443450] Created order (0.013s)
+2026-02-25 02:14:03,464 INFO app.database: Released connection 5 back to pool (active: 4/20)
+2026-02-25 02:14:03,464 INFO app.database: Released connection 5 back to pool (active: 3/20)
+2026-02-25 02:14:03,465 INFO app.server: [req-1740451443450] Response: 201
+2026-02-25 02:14:03,552 INFO app.server: [req-1740451443552] GET /health from 10.0.23.91
+2026-02-25 02:14:03,553 INFO app.database: Acquired connection 5 from pool (active: 4/20)
+2026-02-25 02:14:03,566 INFO app.server: [req-1740451443552] Health check OK (0.014s)
+2026-02-25 02:14:03,567 INFO app.database: Released connection 5 back to pool (active: 3/20)
+2026-02-25 02:14:03,568 INFO app.server: [req-1740451443552] Response: 200
+2026-02-25 02:14:03,655 INFO app.server: [req-1740451443655] POST /api/orders from 10.0.24.33
+2026-02-25 02:14:03,656 INFO app.database: Acquired connection 5 from pool (active: 4/20)
+2026-02-25 02:14:03,668 WARNING app.server: [req-1740451443655] Duplicate order from 10.0.24.33
+2026-02-25 02:14:03,669 INFO app.server: [req-1740451443655] Response: 409
+2026-02-25 02:14:03,756 INFO app.server: [req-1740451443756] GET /api/orders from 10.0.25.78
+2026-02-25 02:14:03,757 INFO app.database: Acquired connection 3 from pool (active: 5/20)
+2026-02-25 02:14:03,770 INFO app.server: [req-1740451443756] Listed 5 orders (0.014s)
+2026-02-25 02:14:03,771 INFO app.database: Released connection 3 back to pool (active: 4/20)
+2026-02-25 02:14:03,772 INFO app.server: [req-1740451443756] Response: 200
+2026-02-25 02:14:03,859 INFO app.server: [req-1740451443859] POST /api/orders from 10.0.26.12
+2026-02-25 02:14:03,860 INFO app.database: Acquired connection 3 from pool (active: 5/20)
+2026-02-25 02:14:03,872 WARNING app.server: [req-1740451443859] Duplicate order from 10.0.26.12
+2026-02-25 02:14:03,873 INFO app.server: [req-1740451443859] Response: 409
+2026-02-25 02:14:03,960 INFO app.server: [req-1740451443960] GET /api/orders/31 from 10.0.27.55
+2026-02-25 02:14:03,961 INFO app.database: Acquired connection 4 from pool (active: 6/20)
+2026-02-25 02:14:03,974 INFO app.server: [req-1740451443960] Fetched order 31 (0.014s)
+2026-02-25 02:14:03,975 INFO app.database: Released connection 4 back to pool (active: 5/20)
+2026-02-25 02:14:03,976 INFO app.server: [req-1740451443960] Response: 200
+2026-02-25 02:14:04,063 INFO app.server: [req-1740451444063] PUT /api/orders/8 from 10.0.28.67
+2026-02-25 02:14:04,064 INFO app.database: Acquired connection 4 from pool (active: 6/20)
+2026-02-25 02:14:04,077 INFO app.server: [req-1740451444063] Updated order 8 (0.014s)
+2026-02-25 02:14:04,078 INFO app.database: Released connection 4 back to pool (active: 5/20)
+2026-02-25 02:14:04,079 INFO app.server: [req-1740451444063] Response: 200
+2026-02-25 02:14:04,166 INFO app.server: [req-1740451444166] POST /api/orders from 10.0.29.88
+2026-02-25 02:14:04,167 INFO app.database: Acquired connection 4 from pool (active: 6/20)
+2026-02-25 02:14:04,179 WARNING app.server: [req-1740451444166] Duplicate order from 10.0.29.88
+2026-02-25 02:14:04,180 INFO app.server: [req-1740451444166] Response: 409
+2026-02-25 02:14:04,267 INFO app.server: [req-1740451444267] GET /health from 10.0.30.44
+2026-02-25 02:14:04,268 INFO app.database: Acquired connection 5 from pool (active: 7/20)
+2026-02-25 02:14:04,281 INFO app.server: [req-1740451444267] Health check OK (0.014s)
+2026-02-25 02:14:04,282 INFO app.database: Released connection 5 back to pool (active: 6/20)
+2026-02-25 02:14:04,283 INFO app.server: [req-1740451444267] Response: 200
+2026-02-25 02:14:04,370 INFO app.server: [req-1740451444370] GET /api/orders from 10.0.31.22
+2026-02-25 02:14:04,371 INFO app.database: Acquired connection 5 from pool (active: 7/20)
+2026-02-25 02:14:04,384 INFO app.server: [req-1740451444370] Listed 5 orders (0.014s)
+2026-02-25 02:14:04,385 INFO app.database: Released connection 5 back to pool (active: 6/20)
+2026-02-25 02:14:04,386 INFO app.server: [req-1740451444370] Response: 200
+2026-02-25 02:14:04,473 INFO app.server: [req-1740451444473] POST /api/orders from 10.0.32.15
+2026-02-25 02:14:04,474 INFO app.database: Acquired connection 5 from pool (active: 7/20)
+2026-02-25 02:14:04,486 WARNING app.server: [req-1740451444473] Duplicate order from 10.0.32.15
+2026-02-25 02:14:04,487 INFO app.server: [req-1740451444473] Response: 409
+2026-02-25 02:14:04,574 INFO app.server: [req-1740451444574] GET /api/orders/18 from 10.0.33.91
+2026-02-25 02:14:04,575 INFO app.database: Acquired connection 3 from pool (active: 8/20)
+2026-02-25 02:14:04,588 INFO app.server: [req-1740451444574] Fetched order 18 (0.014s)
+2026-02-25 02:14:04,589 INFO app.database: Released connection 3 back to pool (active: 7/20)
+2026-02-25 02:14:04,590 INFO app.server: [req-1740451444574] Response: 200
+2026-02-25 02:14:04,677 INFO app.server: [req-1740451444677] POST /api/orders from 10.0.34.33
+2026-02-25 02:14:04,678 INFO app.database: Acquired connection 3 from pool (active: 8/20)
+2026-02-25 02:14:04,690 WARNING app.server: [req-1740451444677] Duplicate order from 10.0.34.33
+2026-02-25 02:14:04,691 INFO app.server: [req-1740451444677] Response: 409
+2026-02-25 02:14:04,778 INFO app.server: [req-1740451444778] DELETE /api/orders/14 from 10.0.35.78
+2026-02-25 02:14:04,779 INFO app.database: Acquired connection 4 from pool (active: 9/20)
+2026-02-25 02:14:04,792 INFO app.server: [req-1740451444778] Deleted order 14 (0.014s)
+2026-02-25 02:14:04,793 INFO app.database: Released connection 4 back to pool (active: 8/20)
+2026-02-25 02:14:04,794 INFO app.server: [req-1740451444778] Response: 200
+2026-02-25 02:14:04,881 INFO app.server: [req-1740451444881] GET /api/orders from 10.0.36.55
+2026-02-25 02:14:04,882 INFO app.database: Acquired connection 4 from pool (active: 9/20)
+2026-02-25 02:14:04,895 INFO app.server: [req-1740451444881] Listed 5 orders (0.014s)
+2026-02-25 02:14:04,896 INFO app.database: Released connection 4 back to pool (active: 8/20)
+2026-02-25 02:14:04,897 INFO app.server: [req-1740451444881] Response: 200
+2026-02-25 02:14:04,984 INFO app.server: [req-1740451444984] POST /api/orders from 10.0.37.12
+2026-02-25 02:14:04,985 INFO app.database: Acquired connection 4 from pool (active: 9/20)
+2026-02-25 02:14:04,997 WARNING app.server: [req-1740451444984] Duplicate order from 10.0.37.12
+2026-02-25 02:14:04,998 INFO app.server: [req-1740451444984] Response: 409
+2026-02-25 02:14:05,085 INFO app.server: [req-1740451445085] GET /health from 10.0.38.67
+2026-02-25 02:14:05,086 INFO app.database: Acquired connection 5 from pool (active: 10/20)
+2026-02-25 02:14:05,099 INFO app.server: [req-1740451445085] Health check OK (0.014s)
+2026-02-25 02:14:05,100 INFO app.database: Released connection 5 back to pool (active: 9/20)
+2026-02-25 02:14:05,101 INFO app.server: [req-1740451445085] Response: 200
+2026-02-25 02:14:05,188 INFO app.server: [req-1740451445188] POST /api/orders from 10.0.39.88
+2026-02-25 02:14:05,189 INFO app.database: Acquired connection 5 from pool (active: 10/20)
+2026-02-25 02:14:05,201 WARNING app.server: [req-1740451445188] Duplicate order from 10.0.39.88
+2026-02-25 02:14:05,202 INFO app.server: [req-1740451445188] Response: 409
+2026-02-25 02:14:05,289 INFO app.server: [req-1740451445289] PUT /api/orders/6 from 10.0.40.44
+2026-02-25 02:14:05,290 INFO app.database: Acquired connection 3 from pool (active: 11/20)
+2026-02-25 02:14:05,303 INFO app.server: [req-1740451445289] Updated order 6 (0.014s)
+2026-02-25 02:14:05,304 INFO app.database: Released connection 3 back to pool (active: 10/20)
+2026-02-25 02:14:05,305 INFO app.server: [req-1740451445289] Response: 200
+2026-02-25 02:14:05,392 INFO app.server: [req-1740451445392] GET /api/orders/27 from 10.0.41.22
+2026-02-25 02:14:05,393 INFO app.database: Acquired connection 3 from pool (active: 11/20)
+2026-02-25 02:14:05,406 INFO app.server: [req-1740451445392] Fetched order 27 (0.014s)
+2026-02-25 02:14:05,407 INFO app.database: Released connection 3 back to pool (active: 10/20)
+2026-02-25 02:14:05,408 INFO app.server: [req-1740451445392] Response: 200
+2026-02-25 02:14:05,495 INFO app.server: [req-1740451445495] POST /api/orders from 10.0.42.15
+2026-02-25 02:14:05,496 INFO app.database: Acquired connection 3 from pool (active: 11/20)
+2026-02-25 02:14:05,508 WARNING app.server: [req-1740451445495] Duplicate order from 10.0.42.15
+2026-02-25 02:14:05,509 INFO app.server: [req-1740451445495] Response: 409
+2026-02-25 02:14:05,596 INFO app.server: [req-1740451445596] GET /api/orders from 10.0.43.91
+2026-02-25 02:14:05,597 INFO app.database: Acquired connection 4 from pool (active: 12/20)
+2026-02-25 02:14:05,610 INFO app.server: [req-1740451445596] Listed 5 orders (0.014s)
+2026-02-25 02:14:05,611 INFO app.database: Released connection 4 back to pool (active: 11/20)
+2026-02-25 02:14:05,612 INFO app.server: [req-1740451445596] Response: 200
+2026-02-25 02:14:05,699 INFO app.server: [req-1740451445699] POST /api/orders from 10.0.44.33
+2026-02-25 02:14:05,700 INFO app.database: Acquired connection 4 from pool (active: 12/20)
+2026-02-25 02:14:05,712 WARNING app.server: [req-1740451445699] Duplicate order from 10.0.44.33
+2026-02-25 02:14:05,713 INFO app.server: [req-1740451445699] Response: 409
+2026-02-25 02:14:05,800 INFO app.server: [req-1740451445800] GET /health from 10.0.45.78
+2026-02-25 02:14:05,801 INFO app.database: Acquired connection 5 from pool (active: 13/20)
+2026-02-25 02:14:05,814 INFO app.server: [req-1740451445800] Health check OK (0.014s)
+2026-02-25 02:14:05,815 INFO app.database: Released connection 5 back to pool (active: 12/20)
+2026-02-25 02:14:05,816 INFO app.server: [req-1740451445800] Response: 200
+2026-02-25 02:14:05,903 INFO app.server: [req-1740451445903] POST /api/orders from 10.0.46.55
+2026-02-25 02:14:05,904 INFO app.database: Acquired connection 5 from pool (active: 13/20)
+2026-02-25 02:14:05,916 WARNING app.server: [req-1740451445903] Duplicate order from 10.0.46.55
+2026-02-25 02:14:05,917 INFO app.server: [req-1740451445903] Response: 409
+2026-02-25 02:14:06,004 INFO app.server: [req-1740451446004] DELETE /api/orders/19 from 10.0.47.12
+2026-02-25 02:14:06,005 INFO app.database: Acquired connection 3 from pool (active: 14/20)
+2026-02-25 02:14:06,018 INFO app.server: [req-1740451446004] Deleted order 19 (0.014s)
+2026-02-25 02:14:06,019 INFO app.database: Released connection 3 back to pool (active: 13/20)
+2026-02-25 02:14:06,020 INFO app.server: [req-1740451446004] Response: 200
+2026-02-25 02:14:06,107 INFO app.server: [req-1740451446107] POST /api/orders from 10.0.48.67
+2026-02-25 02:14:06,108 INFO app.database: Acquired connection 3 from pool (active: 14/20)
+2026-02-25 02:14:06,120 WARNING app.server: [req-1740451446107] Duplicate order from 10.0.48.67
+2026-02-25 02:14:06,121 INFO app.server: [req-1740451446107] Response: 409
+2026-02-25 02:14:06,208 INFO app.server: [req-1740451446208] GET /api/orders/44 from 10.0.49.88
+2026-02-25 02:14:06,209 INFO app.database: Acquired connection 4 from pool (active: 15/20)
+2026-02-25 02:14:06,222 INFO app.server: [req-1740451446208] Fetched order 44 (0.014s)
+2026-02-25 02:14:06,223 INFO app.database: Released connection 4 back to pool (active: 14/20)
+2026-02-25 02:14:06,224 INFO app.server: [req-1740451446208] Response: 200
+2026-02-25 02:14:06,311 INFO app.server: [req-1740451446311] POST /api/orders from 10.0.50.44
+2026-02-25 02:14:06,312 INFO app.database: Acquired connection 4 from pool (active: 15/20)
+2026-02-25 02:14:06,324 WARNING app.server: [req-1740451446311] Duplicate order from 10.0.50.44
+2026-02-25 02:14:06,325 INFO app.server: [req-1740451446311] Response: 409
+2026-02-25 02:14:06,412 INFO app.server: [req-1740451446412] GET /api/orders from 10.0.51.22
+2026-02-25 02:14:06,413 INFO app.database: Acquired connection 5 from pool (active: 16/20)
+2026-02-25 02:14:06,426 INFO app.server: [req-1740451446412] Listed 5 orders (0.014s)
+2026-02-25 02:14:06,427 INFO app.database: Released connection 5 back to pool (active: 15/20)
+2026-02-25 02:14:06,428 INFO app.server: [req-1740451446412] Response: 200
+2026-02-25 02:14:06,515 INFO app.server: [req-1740451446515] POST /api/orders from 10.0.52.15
+2026-02-25 02:14:06,516 INFO app.database: Acquired connection 5 from pool (active: 16/20)
+2026-02-25 02:14:06,528 WARNING app.server: [req-1740451446515] Duplicate order from 10.0.52.15
+2026-02-25 02:14:06,529 INFO app.server: [req-1740451446515] Response: 409
+2026-02-25 02:14:06,616 INFO app.server: [req-1740451446616] GET /health from 10.0.53.91
+2026-02-25 02:14:06,617 INFO app.database: Acquired connection 3 from pool (active: 17/20)
+2026-02-25 02:14:06,630 INFO app.server: [req-1740451446616] Health check OK (0.014s)
+2026-02-25 02:14:06,631 INFO app.database: Released connection 3 back to pool (active: 16/20)
+2026-02-25 02:14:06,632 INFO app.server: [req-1740451446616] Response: 200
+2026-02-25 02:14:06,719 INFO app.server: [req-1740451446719] POST /api/orders from 10.0.54.33
+2026-02-25 02:14:06,720 INFO app.database: Acquired connection 3 from pool (active: 17/20)
+2026-02-25 02:14:06,732 WARNING app.server: [req-1740451446719] Duplicate order from 10.0.54.33
+2026-02-25 02:14:06,733 INFO app.server: [req-1740451446719] Response: 409
+2026-02-25 02:14:06,820 INFO app.server: [req-1740451446820] PUT /api/orders/25 from 10.0.55.78
+2026-02-25 02:14:06,821 INFO app.database: Acquired connection 4 from pool (active: 18/20)
+2026-02-25 02:14:06,834 INFO app.server: [req-1740451446820] Updated order 25 (0.014s)
+2026-02-25 02:14:06,835 INFO app.database: Released connection 4 back to pool (active: 17/20)
+2026-02-25 02:14:06,836 INFO app.server: [req-1740451446820] Response: 200
+2026-02-25 02:14:06,923 INFO app.server: [req-1740451446923] POST /api/orders from 10.0.56.55
+2026-02-25 02:14:06,924 INFO app.database: Acquired connection 4 from pool (active: 18/20)
+2026-02-25 02:14:06,936 WARNING app.server: [req-1740451446923] Duplicate order from 10.0.56.55
+2026-02-25 02:14:06,937 INFO app.server: [req-1740451446923] Response: 409
+2026-02-25 02:14:07,024 INFO app.server: [req-1740451447024] GET /api/orders/37 from 10.0.57.12
+2026-02-25 02:14:07,025 INFO app.database: Acquired connection 5 from pool (active: 19/20)
+2026-02-25 02:14:07,038 INFO app.server: [req-1740451447024] Fetched order 37 (0.014s)
+2026-02-25 02:14:07,039 INFO app.database: Released connection 5 back to pool (active: 18/20)
+2026-02-25 02:14:07,040 INFO app.server: [req-1740451447024] Response: 200
+2026-02-25 02:14:07,127 INFO app.server: [req-1740451447127] POST /api/orders from 10.0.58.67
+2026-02-25 02:14:07,128 INFO app.database: Acquired connection 5 from pool (active: 19/20)
+2026-02-25 02:14:07,140 WARNING app.server: [req-1740451447127] Duplicate order from 10.0.58.67
+2026-02-25 02:14:07,141 INFO app.server: [req-1740451447127] Response: 409
+2026-02-25 02:14:07,228 INFO app.server: [req-1740451447228] GET /api/orders from 10.0.59.88
+2026-02-25 02:14:07,229 INFO app.database: Created and acquired connection 6 from pool (active: 20/20)
+2026-02-25 02:14:07,242 INFO app.server: [req-1740451447228] Listed 5 orders (0.014s)
+2026-02-25 02:14:07,243 INFO app.database: Released connection 6 back to pool (active: 19/20)
+2026-02-25 02:14:07,244 INFO app.server: [req-1740451447228] Response: 200
+2026-02-25 02:14:07,331 INFO app.server: [req-1740451447331] POST /api/orders from 10.0.60.44
+2026-02-25 02:14:07,332 INFO app.database: Acquired connection 6 from pool (active: 20/20)
+2026-02-25 02:14:07,344 WARNING app.server: [req-1740451447331] Duplicate order from 10.0.60.44
+2026-02-25 02:14:07,345 INFO app.server: [req-1740451447331] Response: 409
+2026-02-25 02:14:07,432 INFO app.server: [req-1740451447432] GET /health from 10.0.61.22
+2026-02-25 02:14:07,433 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
+2026-02-25 02:14:12,434 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
+2026-02-25 02:14:12,435 ERROR app.server: [req-1740451447432] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
+2026-02-25 02:14:12,436 INFO app.server: [req-1740451447432] Response: 503
+2026-02-25 02:14:12,523 INFO app.server: [req-1740451452523] GET /api/orders from 10.0.62.15
+2026-02-25 02:14:12,524 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
+2026-02-25 02:14:17,525 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
+2026-02-25 02:14:17,526 ERROR app.server: [req-1740451452523] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
+2026-02-25 02:14:17,527 INFO app.server: [req-1740451452523] Response: 503
+2026-02-25 02:14:17,614 INFO app.server: [req-1740451457614] POST /api/orders from 10.0.63.91
+2026-02-25 02:14:17,615 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
+2026-02-25 02:14:22,616 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
+2026-02-25 02:14:22,617 ERROR app.server: [req-1740451457614] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
+2026-02-25 02:14:22,618 INFO app.server: [req-1740451457614] Response: 503
+2026-02-25 02:14:22,705 INFO app.server: [req-1740451462705] GET /api/orders/12 from 10.0.64.33
+2026-02-25 02:14:22,706 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
+2026-02-25 02:14:27,707 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
+2026-02-25 02:14:27,708 ERROR app.server: [req-1740451462705] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
+2026-02-25 02:14:27,709 INFO app.server: [req-1740451462705] Response: 503
+2026-02-25 02:14:27,796 INFO app.server: [req-1740451467796] GET /health from 10.0.65.78
+2026-02-25 02:14:27,797 WARNING app.database: Connection pool at capacity (20/20). Waiting up to 4.9s for available connection...
+2026-02-25 02:14:32,798 ERROR app.database: Connection pool exhausted! active=20/20, waited=5.00s, timeout=5s
+2026-02-25 02:14:32,799 ERROR app.server: [req-1740451467796] Connection pool exhausted: Could not acquire connection within 5s. Pool: 20/20 connections in use.
+2026-02-25 02:14:32,800 INFO app.server: [req-1740451467796] Response: 503
+2026-02-25 02:14:32,801 CRITICAL app.server: [req-1740451467796] FATAL: Connection pool exhausted! Server cannot process requests.
+2026-02-25 02:14:32,802 CRITICAL app.server: Pool stats: active=20/20, total_created=20, total_acquired=58, total_released=38
+2026-02-25 02:14:32,803 CRITICAL app.server: 20 connections leaked (acquired - released = 58 - 38 = 20)
+2026-02-25 02:14:32,804 CRITICAL app.server: Pool drain correlates with POST /api/orders requests
+2026-02-25 02:14:32,805 CRITICAL app.server: Validation failures (409 responses) preceded each pool increment
+2026-02-25 02:14:32,806 CRITICAL app.server: Connection acquired in _validate_order but not released on failure path

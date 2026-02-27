@@ -202,8 +202,9 @@ def run_tests():
     print()
 
     if passed >= 8:
-        print("  FLAG{ai_menu_assistant_8_of_10}")
-        print()
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+        import ctf_helper
+        ctf_helper.submit(8, ["chatbot.py"])
     else:
         print(f"  Not enough correct answers. Need at least 8/10, got {passed}/10.")
         print("  Review your chatbot logic and try again.")

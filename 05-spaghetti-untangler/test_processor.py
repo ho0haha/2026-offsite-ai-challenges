@@ -4,7 +4,7 @@ Tests for order_processor.py
 Behavior tests verify correct calculations for various order scenarios.
 Structural tests verify that the code has been properly refactored.
 
-When ALL tests pass: FLAG{spaghetti_untangled_cl34n_c0de}
+When ALL tests pass, your solution is auto-submitted to the CTF server.
 """
 
 import pytest
@@ -411,13 +411,18 @@ class TestStructure:
 # FLAG
 # ============================================================
 
-class TestFlag:
-    """Print the flag when all other tests have passed."""
+class TestSubmit:
+    """Auto-submit when all other tests have passed."""
 
-    def test_print_flag(self):
-        """This test always passes - the flag only matters when ALL tests pass."""
+    def test_submit(self):
+        """This test always passes — submits the solution to the CTF server."""
         print("\n")
         print("=" * 50)
-        print("FLAG{spaghetti_untangled_cl34n_c0de}")
+        print("  ALL TESTS PASSED!")
         print("=" * 50)
         print("\n")
+
+        import sys, os
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+        import ctf_helper
+        ctf_helper.submit(5, ["order_processor.py"])

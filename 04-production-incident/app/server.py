@@ -1,7 +1,8 @@
 """Main application server.
 
-Handles incoming HTTP requests by querying the database and returning
-responses. Each request acquires a database connection from the pool.
+Handles incoming HTTP requests by dispatching to the appropriate handler.
+Each handler acquires a database connection from the pool and releases it
+when done to prevent connection leaks.
 """
 
 import json
@@ -11,7 +12,8 @@ import traceback
 from datetime import datetime, timezone
 
 from .config import Config
-from .database import db_pool, ConnectionPoolExhausted
+from . import database
+from .database import ConnectionPoolExhausted
 
 logger = logging.getLogger(__name__)
 
@@ -19,10 +21,11 @@ logger = logging.getLogger(__name__)
 class RequestContext:
     """Holds context for a single request."""
 
-    def __init__(self, method, path, client_ip="127.0.0.1"):
+    def __init__(self, method, path, client_ip="127.0.0.1", body=None):
         self.method = method
         self.path = path
         self.client_ip = client_ip
+        self.body = body or {}
         self.request_id = f"req-{int(time.time()*1000)}"
         self.start_time = time.time()
 
@@ -46,8 +49,7 @@ class Response:
 def handle_request(ctx: RequestContext) -> Response:
     """Handle an incoming HTTP request.
 
-    Acquires a database connection, processes the request, and returns
-    a response.
+    Routes the request to the appropriate handler based on method and path.
 
     Args:
         ctx: The request context containing method, path, etc.
@@ -59,10 +61,36 @@ def handle_request(ctx: RequestContext) -> Response:
         f"[{ctx.request_id}] {ctx.method} {ctx.path} from {ctx.client_ip}"
     )
 
-    # Acquire a database connection
-    conn = db_pool.get_connection()
-
     if ctx.path == "/health":
+        return _handle_health(ctx)
+
+    elif ctx.path == "/api/orders" and ctx.method == "GET":
+        return _handle_list_orders(ctx)
+
+    elif ctx.path == "/api/orders" and ctx.method == "POST":
+        return _handle_create_order(ctx)
+
+    elif ctx.path.startswith("/api/orders/") and ctx.method == "GET":
+        return _handle_get_order(ctx)
+
+    elif ctx.path.startswith("/api/orders/") and ctx.method == "PUT":
+        return _handle_update_order(ctx)
+
+    elif ctx.path.startswith("/api/orders/") and ctx.method == "DELETE":
+        return _handle_delete_order(ctx)
+
+    elif ctx.path == "/api/metrics":
+        stats = database.db_pool.get_stats()
+        return Response(status_code=200, body=stats)
+
+    else:
+        return Response(status_code=404, body={"error": "Not found"})
+
+
+def _handle_health(ctx):
+    """Handle GET /health requests."""
+    conn = database.db_pool.get_connection()
+    try:
         result = conn.execute("SELECT 1")
         elapsed = time.time() - ctx.start_time
         logger.info(
@@ -72,16 +100,35 @@ def handle_request(ctx: RequestContext) -> Response:
             status_code=200,
             body={"status": "healthy", "response_time": elapsed},
         )
+    finally:
+        database.db_pool.release_connection(conn)
 
-    elif ctx.path == "/api/orders" and ctx.method == "GET":
+
+def _handle_list_orders(ctx):
+    """Handle GET /api/orders requests."""
+    conn = database.db_pool.get_connection()
+    try:
         rows = conn.fetchall()
         elapsed = time.time() - ctx.start_time
         logger.info(
             f"[{ctx.request_id}] Listed {len(rows)} orders ({elapsed:.3f}s)"
         )
         return Response(status_code=200, body={"orders": rows})
+    finally:
+        database.db_pool.release_connection(conn)
 
-    elif ctx.path == "/api/orders" and ctx.method == "POST":
+
+def _handle_create_order(ctx):
+    """Handle POST /api/orders requests."""
+    # Validate order data before creating
+    if not _validate_order(ctx):
+        return Response(
+            status_code=409,
+            body={"error": "Duplicate order detected"},
+        )
+
+    conn = database.db_pool.get_connection()
+    try:
         result = conn.execute(
             "INSERT INTO orders (data) VALUES (?)", {"data": "new_order"}
         )
@@ -89,24 +136,94 @@ def handle_request(ctx: RequestContext) -> Response:
         logger.info(
             f"[{ctx.request_id}] Created order ({elapsed:.3f}s)"
         )
-        return Response(status_code=201, body={"order_id": 1, "status": "created"})
+        return Response(
+            status_code=201,
+            body={"order_id": 1, "status": "created"},
+        )
+    finally:
+        database.db_pool.release_connection(conn)
 
-    elif ctx.path.startswith("/api/orders/") and ctx.method == "GET":
+
+def _validate_order(ctx):
+    """Validate order data against business rules.
+
+    Checks for duplicate orders from the same client to prevent
+    double-submissions. Returns True if the order is valid.
+    """
+    conn = database.db_pool.get_connection()
+
+    # Check for recent duplicate orders from this client
+    existing = conn.fetchone()
+
+    if existing:
+        logger.warning(
+            f"[{ctx.request_id}] Duplicate order from {ctx.client_ip}"
+        )
+        return False
+
+    database.db_pool.release_connection(conn)
+    return True
+
+
+def _handle_get_order(ctx):
+    """Handle GET /api/orders/:id requests."""
+    conn = database.db_pool.get_connection()
+    try:
+        order_id = ctx.path.split("/")[-1]
         row = conn.fetchone()
         if row is None:
-            return Response(status_code=404, body={"error": "Order not found"})
+            return Response(
+                status_code=404,
+                body={"error": "Order not found"},
+            )
         elapsed = time.time() - ctx.start_time
         logger.info(
-            f"[{ctx.request_id}] Fetched order ({elapsed:.3f}s)"
+            f"[{ctx.request_id}] Fetched order {order_id} ({elapsed:.3f}s)"
         )
         return Response(status_code=200, body=row)
+    finally:
+        database.db_pool.release_connection(conn)
 
-    elif ctx.path == "/api/metrics":
-        stats = db_pool.get_stats()
-        return Response(status_code=200, body=stats)
 
-    else:
-        return Response(status_code=404, body={"error": "Not found"})
+def _handle_update_order(ctx):
+    """Handle PUT /api/orders/:id requests."""
+    conn = database.db_pool.get_connection()
+    try:
+        order_id = ctx.path.split("/")[-1]
+        result = conn.execute(
+            "UPDATE orders SET data = ? WHERE id = ?",
+            {"data": "updated", "id": order_id},
+        )
+        elapsed = time.time() - ctx.start_time
+        logger.info(
+            f"[{ctx.request_id}] Updated order {order_id} ({elapsed:.3f}s)"
+        )
+        return Response(
+            status_code=200,
+            body={"order_id": order_id, "status": "updated"},
+        )
+    finally:
+        database.db_pool.release_connection(conn)
+
+
+def _handle_delete_order(ctx):
+    """Handle DELETE /api/orders/:id requests."""
+    conn = database.db_pool.get_connection()
+    try:
+        order_id = ctx.path.split("/")[-1]
+        result = conn.execute(
+            "DELETE FROM orders WHERE id = ?", {"id": order_id}
+        )
+        elapsed = time.time() - ctx.start_time
+        logger.info(
+            f"[{ctx.request_id}] Deleted order {order_id} ({elapsed:.3f}s)"
+        )
+        return Response(
+            status_code=200,
+            body={"order_id": order_id, "status": "deleted"},
+        )
+    finally:
+        database.db_pool.release_connection(conn)
 
 
 def process_batch(requests):

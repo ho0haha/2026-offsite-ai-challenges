@@ -14,7 +14,9 @@ from app.routes import reset_db
 
 client = TestClient(app)
 
-FLAG = "FLAG{broken_orders_5_bugs_fixed}"
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(__file__), "..", ".."))
+import ctf_helper as _ctf
 
 
 @pytest.fixture(autouse=True)
@@ -291,13 +293,9 @@ def test_health_check():
 # Flag printer
 # =====================================================================
 
-def test_zz_print_flag(capsys):
-    """If this test runs last and everything passed, print the flag.
-
-    This test always passes - it just prints the flag as a reward.
-    The flag only means something if ALL other tests also passed.
-    """
+def test_zz_submit(capsys):
+    """If this test runs last and everything passed, submit to CTF server."""
     print(f"\n{'='*50}")
     print(f"  ALL TESTS PASSED!")
-    print(f"  {FLAG}")
     print(f"{'='*50}\n")
+    _ctf.submit(3, ["app/routes.py", "app/utils.py", "app/models.py"])

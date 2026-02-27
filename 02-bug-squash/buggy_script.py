@@ -138,7 +138,10 @@ if __name__ == "__main__":
         and order_label_check == expected_order_label
     ):
         print(f"\n✅ All calculations correct!")
-        print(f"FLAG{{bug_squash_d3bugg1ng_pr0}}")
+        import sys, os
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+        import ctf_helper
+        ctf_helper.submit(2, ["buggy_script.py"])
     else:
         print(f"\n❌ Something is still wrong:")
         if round(grand_total, 2) != expected_grand_total:

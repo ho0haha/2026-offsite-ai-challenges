@@ -15,18 +15,24 @@ Yum! Brands Engineering Leadership Offsite - AI Coding Challenge
    python --version
    ```
 
-3. Each challenge is in its own directory. Navigate to a challenge and read the `README.md`:
+3. Run the one-time setup to register on the leaderboard:
+   ```bash
+   python setup.py
+   ```
+   This registers your name on the server and caches your session so challenge tests can auto-submit.
+
+4. Each challenge is in its own directory. Navigate to a challenge and read the `README.md`:
    ```bash
    cd 01-hello-ai
    cat README.md
    ```
 
-4. Install challenge dependencies:
+5. Install challenge dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-5. Solve the challenge, get the flag, and submit it on the leaderboard!
+6. Solve the challenge, get the flag, and submit it on the leaderboard!
 
 ## Challenges
 

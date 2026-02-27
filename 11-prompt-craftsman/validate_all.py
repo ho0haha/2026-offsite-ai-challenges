@@ -250,8 +250,15 @@ def main():
         print()
         print("  All 5 challenges passed!")
         print()
-        print("  FLAG{prompt_craftsman_5_for_5}")
-        print()
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+        import ctf_helper
+        ctf_helper.submit(11, [
+            "outputs/output1.md",
+            "outputs/output2.md",
+            "outputs/output3.md",
+            "outputs/output4.md",
+            "outputs/output5.md",
+        ])
     else:
         print()
         print("  Not all challenges passed. Keep working!")

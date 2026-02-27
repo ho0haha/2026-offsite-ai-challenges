@@ -1,5 +1,7 @@
 """Test suite for Challenge 1: Hello AI. Do not modify this file."""
 import pytest
+import sys, os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from starter import parse_order, format_receipt, analyze_sales
 
 # --- parse_order tests ---
@@ -84,10 +86,10 @@ class TestAnalyzeSales:
         assert result["most_popular_item"] == "Alpha"
 
 
-# --- Flag output ---
+# --- Auto-submit on success ---
 
-def test_flag():
-    """This test runs last. If all above tests pass, print the flag."""
+def test_submit():
+    """This test runs last. If all above tests pass, submit to CTF server."""
     # Verify all functions work end-to-end
     order = parse_order("3xChicken@8.99,2xRice@3.49,1xDrink@2.49")
     assert order["total"] == 36.44
@@ -102,5 +104,7 @@ def test_flag():
 
     print("\n" + "=" * 50)
     print("  ALL TESTS PASSED!")
-    print("  FLAG{hello_ai_w3lc0me_2_th3_ctf}")
     print("=" * 50)
+
+    import ctf_helper
+    ctf_helper.submit(1, ["starter.py"])

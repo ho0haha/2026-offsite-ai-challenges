@@ -31,6 +31,6 @@ bash run_coverage.sh
 - The `search_items` method does fuzzy matching - test various search patterns
 - Check the `get_expiring_soon` method with different date scenarios
 
-## Flag
+## Submission
 
-When coverage reaches 90%+: `FLAG{test_factory_90_percent_c0v3rag3}`
+When coverage reaches 90%+, your solution is auto-submitted to the CTF server.

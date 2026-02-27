@@ -15,8 +15,8 @@ Use your AI coding tool to generate Python function implementations from docstri
    pip install -r requirements.txt
    python -m pytest test_solution.py -v
    ```
-4. When all 9 tests pass, the test harness prints your **flag**
-5. Submit the flag on the CTF leaderboard
+4. When all 9 tests pass, the test harness auto-submits your solution to the CTF server
+5. Check the leaderboard to confirm your points!
 
 ## Tips
 

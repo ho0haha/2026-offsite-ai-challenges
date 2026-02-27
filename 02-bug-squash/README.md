@@ -15,8 +15,8 @@ Use your AI coding tool to find and fix 3 bugs in a Python script.
    ```bash
    python buggy_script.py
    ```
-5. When the script runs correctly, it prints your **flag**
-6. Submit the flag on the CTF leaderboard
+5. When the script runs correctly, it auto-submits your solution to the CTF server
+6. Check the leaderboard to confirm your points!
 
 ## Bug Types
 

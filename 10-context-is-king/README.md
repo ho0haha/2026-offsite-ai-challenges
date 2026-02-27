@@ -33,12 +33,9 @@ python -m pytest tests/test_loyalty.py -v
 
 All 15 tests in `tests/test_loyalty.py` must pass.
 
-## Flag
+## Submission
 
-When all tests pass, the flag will be printed:
-```
-FLAG{context_is_king_l0yalty_p0ints}
-```
+When all tests pass, your solution is auto-submitted to the CTF server.
 
 ## Tips
 

@@ -45,7 +45,7 @@ After generating `output.csv`, run:
 python validate.py
 ```
 
-This compares your output against a ground truth file. Both the category AND sentiment must match for each entry to count as correct. You need **85% accuracy** (at least 43 out of 50 correct) to earn the flag.
+This compares your output against a ground truth file. Both the category AND sentiment must match for each entry to count as correct. You need **85% accuracy** (at least 43 out of 50 correct) — your solution is auto-submitted when you pass.
 
 ## Files
 

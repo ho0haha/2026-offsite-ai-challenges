@@ -229,9 +229,13 @@ async def test_store_has_required_fields(client):
             assert field in store, f"Store missing required field: '{field}'"
 
 
-# ---------- FLAG ----------
-def test_flag():
-    """If all tests above pass, this prints the flag."""
+# ---------- Auto-submit ----------
+def test_submit():
+    """If all tests above pass, submit to CTF server."""
     print("\n" + "=" * 50)
-    print("FLAG{full_stack_sprint_st0re_l0cat0r}")
+    print("  ALL TESTS PASSED!")
     print("=" * 50)
+
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+    import ctf_helper
+    ctf_helper.submit(12, ["app/main.py"])

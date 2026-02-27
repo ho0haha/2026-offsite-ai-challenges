@@ -36,12 +36,8 @@ Your job is to find and fix all 5 bugs so every test passes.
 - All bugs are in the `app/` directory.
 - There are exactly **5 bugs** spread across the source files.
 
-## Flag
+## Submission
 
-When all 21 tests pass, the flag will be printed to the console:
-
-```
-FLAG{broken_orders_5_bugs_fixed}
-```
+When all 21 tests pass, your solution is auto-submitted to the CTF server.
 
 Good luck!

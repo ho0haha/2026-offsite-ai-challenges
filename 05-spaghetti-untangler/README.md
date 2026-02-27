@@ -37,6 +37,6 @@ python -m pytest test_processor.py -v
 - Replace magic numbers with well-named constants
 - The behavior tests are your safety net - if they pass, you haven't broken anything
 
-## Flag
+## Submission
 
-When all tests pass: `FLAG{spaghetti_untangled_cl34n_c0de}`
+When all tests pass, your solution is auto-submitted to the CTF server.

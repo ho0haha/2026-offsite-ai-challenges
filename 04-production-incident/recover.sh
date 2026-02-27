@@ -18,7 +18,7 @@ SERVER_FILE="$SCRIPT_DIR/app/server.py"
 HEALTHCHECK="$SCRIPT_DIR/healthcheck.py"
 
 # Step 1: Verify the fix pattern exists in server.py
-echo "[1/3] Checking server.py for proper connection cleanup..."
+echo "[1/4] Checking server.py for proper connection cleanup..."
 echo ""
 
 HAS_FINALLY=false
@@ -45,32 +45,51 @@ echo ""
 
 if [ "$HAS_FINALLY" = false ] || [ "$HAS_RELEASE" = false ]; then
     echo "[FAIL] Fix validation failed."
-    echo "       The connection leak in handle_request() must be fixed"
-    echo "       by releasing connections in a finally block."
+    echo "       The connection leak must be fixed by releasing"
+    echo "       connections in a finally block."
     echo ""
     echo "=============================================="
     exit 1
 fi
 
-echo "[2/3] Fix pattern verified. Running health check..."
+# Step 2: Verify all get_connection calls are protected by finally blocks
+echo "[2/4] Checking that all connections are protected by finally blocks..."
 echo ""
 
-# Step 2: Run the health check
+FINALLY_COUNT=$(grep -c "finally" "$SERVER_FILE")
+GET_CONN_COUNT=$(grep -c "get_connection" "$SERVER_FILE")
+
+if [ "$FINALLY_COUNT" -lt "$GET_CONN_COUNT" ]; then
+    echo "  [FAIL] Not all get_connection() calls are protected by finally blocks"
+    echo "         Found $GET_CONN_COUNT get_connection() calls but only $FINALLY_COUNT finally blocks"
+    echo "         Every connection acquisition must have a corresponding finally block."
+    echo ""
+    echo "=============================================="
+    exit 1
+else
+    echo "  [PASS] All get_connection() calls appear to be protected ($FINALLY_COUNT finally, $GET_CONN_COUNT get_connection)"
+fi
+
+echo ""
+echo "[3/4] Fix pattern verified. Running health check..."
+echo ""
+
+# Step 3: Run the health check
 cd "$SCRIPT_DIR"
 if python healthcheck.py; then
     echo ""
-    echo "[3/3] Health check passed!"
+    echo "[4/4] Health check passed!"
     echo ""
     echo "=============================================="
     echo ""
     echo "  RECOVERY SUCCESSFUL!"
     echo ""
-    echo "  Root cause: Connection leak in handle_request()"
-    echo "  Fix: Added try/finally with release_connection()"
-    echo ""
-    echo "  FLAG{production_incident_r00t_caus3}"
+    echo "  Root cause: Connection leak in _validate_order()"
+    echo "  Fix: Added try/finally to ensure release_connection()"
+    echo "       is called on all code paths."
     echo ""
     echo "=============================================="
+    python "$SCRIPT_DIR/../ctf_helper.py" 4 app/server.py
     exit 0
 else
     echo ""

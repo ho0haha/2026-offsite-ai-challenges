@@ -15,7 +15,9 @@ import sys
 GROUND_TRUTH_FILE = "ground_truth.json"
 OUTPUT_FILE = "output.csv"
 REQUIRED_ACCURACY = 0.85
-FLAG = "FLAG{smart_sorter_85_percent_acc}"
+import sys as _sys2, os as _os2
+_sys2.path.insert(0, _os2.path.join(_os2.path.dirname(_os2.path.abspath(__file__)), ".."))
+import ctf_helper as _ctf
 
 VALID_CATEGORIES = {"service", "food_quality", "wait_time", "cleanliness", "other"}
 VALID_SENTIMENTS = {"positive", "negative"}
@@ -168,8 +170,7 @@ def validate():
 
     if accuracy >= REQUIRED_ACCURACY:
         print()
-        print(f"  {FLAG}")
-        print()
+        _ctf.submit(9, ["output.csv"])
     else:
         print()
         print(f"  Accuracy {pct:.1f}% is below the {REQUIRED_ACCURACY * 100:.0f}% threshold.")

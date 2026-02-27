@@ -2,17 +2,20 @@
 
 This script simulates a series of requests to the application server
 and verifies that it remains healthy. It tests that the server can
-handle multiple consecutive requests without connection pool exhaustion.
+handle multiple consecutive requests — including POST requests that
+trigger order validation — without connection pool exhaustion.
 
 Expected behavior when bug is PRESENT:
-    - The server starts responding normally
-    - After ~20 requests, the connection pool is exhausted
+    - GET requests work fine initially
+    - POST /api/orders requests trigger validation that leaks connections
+    - After ~10 POST requests, the connection pool is exhausted
     - Subsequent requests fail with 503 errors
     - The health check reports FAILURE
 
 Expected behavior when bug is FIXED:
-    - All requests succeed
+    - All requests succeed (GET and POST)
     - The connection pool stays healthy
+    - total_acquired == total_released
     - The health check reports PASS
 """
 
@@ -33,9 +36,10 @@ from app.server import handle_request, RequestContext
 def run_health_check():
     """Run the health check.
 
-    Simulates 50 sequential requests to the server. If the connection
-    pool is leaking, it will be exhausted after ~20 requests (the default
-    pool max size). If the bug is fixed, all 50 requests should succeed.
+    Simulates a realistic mix of requests including GET and POST operations.
+    POST /api/orders triggers order validation which, if buggy, will leak
+    connections on the duplicate-check path. With a pool size of 10, the
+    pool will exhaust after ~10 leaked POST requests.
     """
     print("=" * 60)
     print("  PRODUCTION HEALTH CHECK")
@@ -44,9 +48,43 @@ def run_health_check():
 
     # Create a fresh pool for testing
     from app import database
-    database.db_pool = ConnectionPool(min_size=2, max_size=10, timeout=2)
+    database.db_pool = ConnectionPool(min_size=2, max_size=10, timeout=0.5)
 
-    total_requests = 50
+    # Realistic mix of requests across all endpoint types
+    request_sequence = [
+        ("GET", "/health"),
+        ("GET", "/api/orders"),
+        ("POST", "/api/orders"),
+        ("GET", "/api/orders/1"),
+        ("GET", "/health"),
+        ("POST", "/api/orders"),
+        ("GET", "/api/orders"),
+        ("GET", "/api/orders/42"),
+        ("POST", "/api/orders"),
+        ("GET", "/health"),
+        ("POST", "/api/orders"),
+        ("GET", "/api/orders/7"),
+        ("POST", "/api/orders"),
+        ("GET", "/api/orders"),
+        ("POST", "/api/orders"),
+        ("GET", "/health"),
+        ("POST", "/api/orders"),
+        ("GET", "/api/orders/3"),
+        ("POST", "/api/orders"),
+        ("GET", "/api/orders"),
+        ("POST", "/api/orders"),
+        ("GET", "/health"),
+        ("POST", "/api/orders"),
+        ("GET", "/api/orders/15"),
+        ("POST", "/api/orders"),
+        ("GET", "/api/orders"),
+        ("GET", "/health"),
+        ("POST", "/api/orders"),
+        ("GET", "/api/orders/99"),
+        ("POST", "/api/orders"),
+    ]
+
+    total_requests = len(request_sequence)
     successes = 0
     failures = 0
     pool_errors = 0
@@ -54,29 +92,29 @@ def run_health_check():
     print(f"Sending {total_requests} test requests...")
     print()
 
-    for i in range(total_requests):
+    for i, (method, path) in enumerate(request_sequence):
         ctx = RequestContext(
-            method="GET",
-            path="/health",
-            client_ip="10.0.0.1",
+            method=method,
+            path=path,
+            client_ip=f"10.0.0.{i % 256}",
         )
         try:
             response = handle_request(ctx)
-            if response.status_code == 200:
+            if response.status_code < 500:
                 successes += 1
             else:
                 failures += 1
-                print(f"  Request {i+1}: HTTP {response.status_code}")
+                print(f"  Request {i+1}: {method} {path} -> HTTP {response.status_code}")
         except ConnectionPoolExhausted as e:
             pool_errors += 1
             if pool_errors == 1:
-                print(f"  Request {i+1}: CONNECTION POOL EXHAUSTED")
+                print(f"  Request {i+1}: {method} {path} -> CONNECTION POOL EXHAUSTED")
                 print(f"    {e}")
             elif pool_errors == 2:
                 print(f"  ... (suppressing further pool errors)")
         except Exception as e:
             failures += 1
-            print(f"  Request {i+1}: ERROR - {e}")
+            print(f"  Request {i+1}: {method} {path} -> ERROR - {e}")
 
     print()
     print("-" * 60)
@@ -89,17 +127,19 @@ def run_health_check():
     # Check pool stats
     stats = database.db_pool.get_stats()
     print(f"  Connection Pool Status:")
-    print(f"    Active:    {stats['active_connections']}/{stats['max_size']}")
-    print(f"    Available: {stats['available']}")
-    print(f"    Created:   {stats['total_created']}")
+    print(f"    Active:         {stats['active_connections']}/{stats['max_size']}")
+    print(f"    Available:      {stats['available']}")
+    print(f"    Created:        {stats['total_created']}")
+    print(f"    Total Acquired: {stats['total_acquired']}")
+    print(f"    Total Released: {stats['total_released']}")
     print()
 
     if pool_errors > 0:
         print("  STATUS: FAIL - Connection pool exhausted!")
         print()
         print("  DIAGNOSIS: Connections are being acquired but not released")
-        print("  back to the pool. Investigate request handlers in server.py")
-        print("  for missing release_connection() calls.")
+        print("  back to the pool. Check the logs to identify which endpoint")
+        print("  and code path is leaking connections.")
         print("=" * 60)
         return False
     elif failures > 0:

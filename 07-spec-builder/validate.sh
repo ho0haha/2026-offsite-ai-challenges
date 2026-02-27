@@ -48,6 +48,6 @@ fi
 echo ""
 echo "============================================================"
 echo "  BOTH PHASES PASSED!"
-echo ""
-echo "  FLAG{spec_builder_prd_2_pr0duct}"
 echo "============================================================"
+
+python "$SCRIPT_DIR/../ctf_helper.py" 7 prd.md

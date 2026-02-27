@@ -80,6 +80,8 @@ class ConnectionPool:
         self._lock = threading.Lock()
         self._total_created = 0
         self._active_count = 0
+        self._total_acquired = 0
+        self._total_released = 0
 
         # Pre-populate pool with minimum connections
         for _ in range(self.min_size):
@@ -91,12 +93,20 @@ class ConnectionPool:
             f"max={self.max_size}, timeout={self.timeout}s"
         )
 
-    def _create_connection(self):
-        """Create a new database connection."""
+    def _create_connection(self, _locked=False):
+        """Create a new database connection.
+
+        Args:
+            _locked: If True, caller already holds self._lock.
+        """
         conn = MockConnection()
-        with self._lock:
+        if _locked:
             self._all_connections.append(conn)
             self._total_created += 1
+        else:
+            with self._lock:
+                self._all_connections.append(conn)
+                self._total_created += 1
         logger.debug(f"Created new connection {conn.id} (total: {self._total_created})")
         return conn
 
@@ -122,7 +132,8 @@ class ConnectionPool:
             conn.in_use = True
             with self._lock:
                 self._active_count += 1
-            logger.debug(
+                self._total_acquired += 1
+            logger.info(
                 f"Acquired connection {conn.id} from pool "
                 f"(active: {self._active_count}/{self.max_size})"
             )
@@ -133,10 +144,11 @@ class ConnectionPool:
         # Pool is empty - try to create a new connection if under max
         with self._lock:
             if self._total_created < self.max_size:
-                conn = self._create_connection()
+                conn = self._create_connection(_locked=True)
                 conn.in_use = True
                 self._active_count += 1
-                logger.debug(
+                self._total_acquired += 1
+                logger.info(
                     f"Created and acquired connection {conn.id} "
                     f"(active: {self._active_count}/{self.max_size})"
                 )
@@ -158,6 +170,7 @@ class ConnectionPool:
                 conn.in_use = True
                 with self._lock:
                     self._active_count += 1
+                    self._total_acquired += 1
                 logger.warning(
                     f"Acquired connection {conn.id} after {wait_time:.2f}s wait "
                     f"(active: {self._active_count}/{self.max_size})"
@@ -196,10 +209,11 @@ class ConnectionPool:
         conn.in_use = False
         with self._lock:
             self._active_count = max(0, self._active_count - 1)
+            self._total_released += 1
 
         try:
             self._pool.put_nowait(conn)
-            logger.debug(
+            logger.info(
                 f"Released connection {conn.id} back to pool "
                 f"(active: {self._active_count}/{self.max_size})"
             )
@@ -217,6 +231,8 @@ class ConnectionPool:
                 "pool_size": self._pool.qsize(),
                 "max_size": self.max_size,
                 "available": self._pool.qsize(),
+                "total_acquired": self._total_acquired,
+                "total_released": self._total_released,
             }
 
     def shutdown(self):

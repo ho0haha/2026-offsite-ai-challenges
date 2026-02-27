@@ -61,11 +61,9 @@ python -m pytest test_e2e.py -v
 
 All 15 tests in `test_e2e.py` must pass.
 
-## Flag
+## Submission
 
-```
-FLAG{full_stack_sprint_st0re_l0cat0r}
-```
+When all tests pass, your solution is auto-submitted to the CTF server.
 
 ## Tips
 
