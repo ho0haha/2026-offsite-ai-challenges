@@ -15,24 +15,30 @@ Yum! Brands Engineering Leadership Offsite - AI Coding Challenge
    python --version
    ```
 
-3. Run the one-time setup to register on the leaderboard:
+3. Copy the environment template and fill in your values:
+   ```bash
+   cp .env.example .env
+   ```
+   Edit `.env` and set `CTF_SERVER`, `CTF_JOIN_CODE`, and `ANTHROPIC_API_KEY` (provided by facilitator).
+
+4. Run the one-time setup to register on the leaderboard:
    ```bash
    python setup.py
    ```
    This registers your name on the server and caches your session so challenge tests can auto-submit.
 
-4. Each challenge is in its own directory. Navigate to a challenge and read the `README.md`:
+5. Each challenge is in its own directory. Navigate to a challenge and read the `README.md`:
    ```bash
    cd 01-hello-ai
    cat README.md
    ```
 
-5. Install challenge dependencies:
+6. Install challenge dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-6. Solve the challenge, get the flag, and submit it on the leaderboard!
+7. Solve the challenge, get the flag, and submit it on the leaderboard!
 
 ## Challenges
 

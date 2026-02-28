@@ -17,11 +17,18 @@ SESSION_FILE = os.path.expanduser("~/.ctf_session")
 
 def main():
     # --- Load .env ---------------------------------------------------------
-    env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
+    root_dir = os.path.dirname(os.path.abspath(__file__))
+    env_path = os.path.join(root_dir, ".env")
+    example_path = os.path.join(root_dir, ".env.example")
     if not os.path.exists(env_path):
-        print("ERROR: .env file not found at repo root.")
-        print("Ask an organizer for the .env file.")
-        sys.exit(1)
+        if os.path.exists(example_path):
+            import shutil
+            shutil.copy(example_path, env_path)
+            print("Created .env from .env.example — edit it to fill in your values.")
+        else:
+            print("ERROR: .env file not found at repo root.")
+            print("Copy .env.example to .env and fill in your values.")
+            sys.exit(1)
 
     env = {}
     with open(env_path) as f:
