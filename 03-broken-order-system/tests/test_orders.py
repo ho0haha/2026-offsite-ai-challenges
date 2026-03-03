@@ -48,7 +48,7 @@ def create_sample_order(**overrides):
 # =====================================================================
 
 def test_create_order_returns_201():
-    """BUG #2: Creating an order should return HTTP 201 Created."""
+    """Creating an order should return HTTP 201 Created."""
     payload = create_sample_order()
     response = client.post("/orders", json=payload)
     assert response.status_code == 201, (
@@ -88,7 +88,7 @@ def test_get_order_not_found():
 # =====================================================================
 
 def test_pagination_page_one():
-    """BUG #1: First page should return the first batch of orders."""
+    """First page should return the first batch of orders."""
     # Create 5 orders
     for i in range(5):
         client.post("/orders", json=create_sample_order(customer_name=f"Customer_{i}"))
@@ -153,7 +153,7 @@ def test_order_summary_subtotal():
 
 
 def test_order_summary_tax():
-    """BUG #4: Tax should be 8.5% of subtotal."""
+    """Tax should be 8.5% of subtotal."""
     payload = create_sample_order(items=[
         {"name": "Steak", "quantity": 1, "unit_price": 100.00},
     ])
@@ -195,7 +195,7 @@ def test_order_summary_item_count():
 # =====================================================================
 
 def test_reject_empty_items():
-    """BUG #5: Orders with no items should be rejected with 400."""
+    """Orders with no items should be rejected with 400."""
     payload = create_sample_order(items=[])
     response = client.post("/orders", json=payload)
     assert response.status_code == 400, (
@@ -204,7 +204,7 @@ def test_reject_empty_items():
 
 
 def test_reject_zero_quantity():
-    """BUG #3: Items with quantity 0 should be rejected."""
+    """Items with quantity 0 should be rejected."""
     payload = create_sample_order(items=[
         {"name": "Burger", "quantity": 0, "unit_price": 12.99},
     ])
@@ -215,7 +215,7 @@ def test_reject_zero_quantity():
 
 
 def test_reject_negative_quantity():
-    """BUG #3: Items with negative quantity should be rejected."""
+    """Items with negative quantity should be rejected."""
     payload = create_sample_order(items=[
         {"name": "Burger", "quantity": -1, "unit_price": 12.99},
     ])

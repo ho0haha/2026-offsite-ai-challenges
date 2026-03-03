@@ -8,7 +8,6 @@ There are 3 bugs hidden in this code. Find and fix them all!
 def calculate_item_total(price: float, quantity: int, discount_percent: float = 0) -> float:
     """Calculate the total for a single item after discount."""
     discount = price * quantity * (discount_percent / 100)
-    # BUG 1: Wrong operator — should be subtraction, not addition
     total = price * quantity + discount
     return round(total, 2)
 
@@ -35,7 +34,6 @@ def get_order_summary(items: list[dict]) -> dict:
         })
         subtotal += total
 
-    # BUG 2: Missing return statement — function returns None
     summary = {
         "items": processed,
         "subtotal": round(subtotal, 2),
@@ -58,8 +56,6 @@ def format_order_number(order_id: int, total_orders: int) -> str:
         order_id: 0-based index of the order
         total_orders: total number of orders
     """
-    # BUG 3: Off-by-one — order_id is 0-based, but display should be 1-based
-    # Currently shows "Order 0 of 5" instead of "Order 1 of 5"
     display_number = order_id
     return f"Order {display_number} of {total_orders}"
 
@@ -125,28 +121,17 @@ if __name__ == "__main__":
     print(f"  TOTAL ITEMS: {total_items}")
     print(f"{'='*40}")
 
-    # Validation — these are the correct values when all bugs are fixed
-    expected_grand_total = 97.33
-    expected_total_items = 16
-    expected_order_label = "Order 1 of 3"
+    # Validation — run this script to check your fixes
+    import sys, os, hashlib
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+    import ctf_helper
 
     order_label_check = format_order_number(0, 3)
+    fingerprint = f"{round(grand_total, 2)}|{total_items}|{order_label_check}"
+    expected_hash = "2f93e2eeb67d3060ffdbb31ca64baf10f7e338581c25a7369d380b8dd90abf62"
 
-    if (
-        round(grand_total, 2) == expected_grand_total
-        and total_items == expected_total_items
-        and order_label_check == expected_order_label
-    ):
+    if hashlib.sha256(fingerprint.encode()).hexdigest() == expected_hash:
         print(f"\n✅ All calculations correct!")
-        import sys, os
-        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-        import ctf_helper
         ctf_helper.submit(2, ["buggy_script.py"])
     else:
-        print(f"\n❌ Something is still wrong:")
-        if round(grand_total, 2) != expected_grand_total:
-            print(f"  Grand total: got ${grand_total:.2f}, expected ${expected_grand_total}")
-        if total_items != expected_total_items:
-            print(f"  Total items: got {total_items}, expected {expected_total_items}")
-        if order_label_check != expected_order_label:
-            print(f"  Order label: got '{order_label_check}', expected '{expected_order_label}'")
+        print(f"\n❌ Something is still wrong — keep debugging!")
