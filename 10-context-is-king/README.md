@@ -1,7 +1,5 @@
 # Challenge 10: Context is King (350 pts)
 
-## Tool: Cursor
-
 ## Objective
 
 Add a **loyalty points** feature to an existing restaurant management system. The feature must be implemented across 6 files while keeping all existing functionality working.

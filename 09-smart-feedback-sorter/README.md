@@ -1,7 +1,5 @@
 # Challenge 9: Smart Feedback Sorter (250 pts)
 
-**Tool:** Claude Code
-
 ## Overview
 
 Build a script that uses the Claude API to automatically categorize customer feedback into predefined categories and determine sentiment.

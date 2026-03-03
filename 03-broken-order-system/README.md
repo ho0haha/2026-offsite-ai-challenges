@@ -1,7 +1,5 @@
 # Challenge 3: The Broken Order System (200 pts)
 
-## Tool: Cursor
-
 ## Scenario
 
 You've inherited a FastAPI restaurant ordering API from a developer who left the company.
@@ -10,7 +8,7 @@ Your job is to find and fix all 5 bugs so every test passes.
 
 ## Getting Started
 
-1. Open this folder in **Cursor**
+1. Open this folder in your AI coding assistant
 2. Install dependencies:
    ```bash
    pip install -r requirements.txt
@@ -19,7 +17,7 @@ Your job is to find and fix all 5 bugs so every test passes.
    ```bash
    pytest tests/test_orders.py -v
    ```
-4. You should see **9 failing tests** (caused by 5 bugs). Use Cursor's AI features to help you find and fix the bugs.
+4. You should see **9 failing tests** (caused by 5 bugs). Use your AI tool's features to help you find and fix the bugs.
 
 ## API Endpoints
 

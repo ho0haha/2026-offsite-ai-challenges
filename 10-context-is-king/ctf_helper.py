@@ -82,7 +82,7 @@ def _api_post_json(url, data):
 def get_participant_id():
     """
     Get the participant ID, using cached session or prompting for name.
-    Returns (participant_id, event_id) tuple.
+    Returns (participant_id, event_id, token) tuple.
     """
     # Check cache
     if os.path.exists(SESSION_FILE):
@@ -90,7 +90,7 @@ def get_participant_id():
             with open(SESSION_FILE) as f:
                 session = json.load(f)
             if "participantId" in session and "eventId" in session:
-                return session["participantId"], session["eventId"]
+                return session["participantId"], session["eventId"], session.get("token", "")
         except (json.JSONDecodeError, KeyError):
             pass
 
@@ -127,13 +127,14 @@ def get_participant_id():
 
     participant_id = result.get("participantId") or result.get("participant", {}).get("id")
     event_id = result.get("eventId") or result.get("event", {}).get("id")
+    token = result.get("token", "")
 
     if not participant_id or not event_id:
         print(f"ERROR: Unexpected response from server: {result}")
         sys.exit(1)
 
     # Cache session
-    session = {"participantId": participant_id, "eventId": event_id, "name": name}
+    session = {"participantId": participant_id, "eventId": event_id, "name": name, "token": token}
     try:
         with open(SESSION_FILE, "w") as f:
             json.dump(session, f)
@@ -142,7 +143,7 @@ def get_participant_id():
 
     print(f"  Found! Session saved. Welcome, {name}!")
     print()
-    return participant_id, event_id
+    return participant_id, event_id, token
 
 
 def _build_multipart(fields, files):
@@ -195,7 +196,7 @@ def submit(challenge_number, file_paths):
         challenge_number: int (1-12)
         file_paths: list of file paths relative to the challenge directory
     """
-    participant_id, event_id = get_participant_id()
+    participant_id, event_id, token = get_participant_id()
     env = _load_env()
     server = env["CTF_SERVER"].rstrip("/")
 
@@ -223,6 +224,8 @@ def submit(challenge_number, file_paths):
     try:
         req = Request(f"{server}/api/validate", data=body, method="POST")
         req.add_header("Content-Type", content_type)
+        if token:
+            req.add_header("Authorization", f"Bearer {token}")
         with urlopen(req, timeout=30) as resp:
             result = json.loads(resp.read().decode("utf-8"))
     except (URLError, HTTPError) as e:

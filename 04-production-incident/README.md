@@ -1,7 +1,5 @@
 # Challenge 4: Production Incident (200 pts)
 
-## Tool: Claude Code
-
 ## Scenario
 
 It's 2 AM and PagerDuty just woke you up. The production API server is returning 503 errors
@@ -12,7 +10,7 @@ You need to diagnose the root cause from the **logs and code together**, then fi
 
 ## Getting Started
 
-1. Open this folder in your terminal with **Claude Code**
+1. Open this folder in your AI coding assistant
 2. Install dependencies:
    ```bash
    pip install -r requirements.txt

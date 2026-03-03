@@ -1,7 +1,5 @@
 # Challenge 11: Prompt Craftsman (200 pts)
 
-## Tool: Cursor
-
 ## Objective
 
 Complete 5 prompt engineering mini-challenges. For each challenge, you must craft the right prompts to your AI assistant and save the output to the `outputs/` directory.

@@ -42,25 +42,30 @@ Yum! Brands Engineering Leadership Offsite - AI Coding Challenge
 
 ## Challenges
 
-| # | Challenge | Points | Tool | Difficulty |
-|---|-----------|--------|------|------------|
-| 1 | [Hello AI](./01-hello-ai) | 50 | Cursor | Easy |
-| 2 | [Bug Squash](./02-bug-squash) | 50 | Claude Code | Easy |
-| 3 | [The Broken Order System](./03-broken-order-system) | 200 | Cursor | Medium |
-| 4 | [Production Incident](./04-production-incident) | 200 | Claude Code | Medium |
-| 5 | [Spaghetti Untangler](./05-spaghetti-untangler) | 250 | Cursor | Hard |
-| 6 | [Test Factory](./06-test-factory) | 200 | Claude Code | Medium |
-| 7 | [Spec Builder + Build](./07-spec-builder) | 500 | Claude Code | Hard |
-| 8 | [AI Menu Assistant](./08-ai-menu-assistant) | 300 | Cursor | Medium |
-| 9 | [Smart Feedback Sorter](./09-smart-feedback-sorter) | 250 | Claude Code | Medium |
-| 10 | [Context is King](./10-context-is-king) | 350 | Cursor | Hard |
-| 11 | [Prompt Craftsman](./11-prompt-craftsman) | 200 | Cursor | Medium |
-| 12 | [Full Stack Sprint](./12-full-stack-sprint) | 500 | Claude Code | Hard |
+| # | Challenge | Points | Difficulty |
+|---|-----------|--------|------------|
+| 1 | [Hello AI](./01-hello-ai) | 50 | Easy |
+| 2 | [Bug Squash](./02-bug-squash) | 50 | Easy |
+| 3 | [The Broken Order System](./03-broken-order-system) | 200 | Medium |
+| 4 | [Production Incident](./04-production-incident) | 200 | Medium |
+| 5 | [Spaghetti Untangler](./05-spaghetti-untangler) | 250 | Hard |
+| 6 | [Test Factory](./06-test-factory) | 200 | Medium |
+| 7 | [Spec Builder + Build](./07-spec-builder) | 500 | Hard |
+| 8 | [AI Menu Assistant](./08-ai-menu-assistant) | 300 | Medium |
+| 9 | [Smart Feedback Sorter](./09-smart-feedback-sorter) | 250 | Medium |
+| 10 | [Context is King](./10-context-is-king) | 350 | Hard |
+| 11 | [Prompt Craftsman](./11-prompt-craftsman) | 200 | Medium |
+| 12 | [Full Stack Sprint](./12-full-stack-sprint) | 500 | Hard |
 
-## Tool Assignments
+## Tier Progression
 
-- **Cursor challenges:** 1, 3, 5, 8, 10, 11
-- **Claude Code challenges:** 2, 4, 6, 7, 9, 12
+Challenges unlock progressively as you prove your skills:
+
+| Tier | Challenges | Unlock Rule |
+|------|-----------|-------------|
+| 1 | 1-2 (Warm-Up) | Available immediately |
+| 2 | 3-6 (Debugging, Refactoring) | Complete both Tier 1 challenges |
+| 3 | 7-12 (Advanced) | Complete 2+ Tier 2 challenges |
 
 ## Recommended Order
 
@@ -73,6 +78,5 @@ Yum! Brands Engineering Leadership Offsite - AI Coding Challenge
 
 - Python 3.11+
 - pip
-- [Cursor](https://cursor.sh) (for Cursor challenges)
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (for Claude Code challenges)
+- An AI coding assistant ([Cursor](https://cursor.sh), [Claude Code](https://docs.anthropic.com/en/docs/claude-code), GitHub Copilot, etc.)
 - For challenges 8 & 9: `ANTHROPIC_API_KEY` environment variable (provided by facilitator)

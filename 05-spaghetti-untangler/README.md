@@ -1,7 +1,5 @@
 # Challenge 5: Spaghetti Untangler (250 pts)
 
-**Tool:** Cursor
-
 ## Objective
 
 You've inherited `order_processor.py` from a developer who believed in "one function to rule them all." The entire restaurant order processing pipeline lives inside a single ~400-line function full of magic numbers, deep nesting, duplicated logic, and single-letter variable names.

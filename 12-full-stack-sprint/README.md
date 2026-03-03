@@ -1,7 +1,5 @@
 # Challenge 12: Full Stack Sprint (500 pts)
 
-## Tool: Claude Code
-
 ## Objective
 
 Build a **store locator API** from scratch. You are given only data and tests — you must build everything else.

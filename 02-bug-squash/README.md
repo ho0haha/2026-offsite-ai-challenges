@@ -1,6 +1,6 @@
 # Challenge 2: Bug Squash
 
-**Points:** 50 | **Tool:** Claude Code | **Difficulty:** Easy
+**Points:** 50 | **Difficulty:** Easy
 
 ## Objective
 
@@ -9,7 +9,7 @@ Use your AI coding tool to find and fix 3 bugs in a Python script.
 ## Instructions
 
 1. Open `buggy_script.py` — it's a restaurant order processing script with **3 planted bugs**
-2. Feed the file to Claude Code and ask it to identify all bugs
+2. Feed the file to your AI coding assistant and ask it to identify all bugs
 3. Apply the fixes
 4. Run the script:
    ```bash

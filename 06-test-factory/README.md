@@ -1,7 +1,5 @@
 # Challenge 6: Test Factory (200 pts)
 
-**Tool:** Claude Code
-
 ## Objective
 
 You have a fully functional restaurant inventory management module (`inventory.py`) with **0% test coverage**. Your job is to write a comprehensive test suite that achieves **90%+ code coverage**.

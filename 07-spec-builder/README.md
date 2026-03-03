@@ -1,7 +1,5 @@
 # Challenge 7: Spec Builder + Build (500 pts)
 
-**Tool:** Claude Code
-
 ## Overview
 
 This is a two-phase challenge. First, you write a Product Requirements Document (PRD) based on a vague business brief. Then, you build the feature described in your own PRD.

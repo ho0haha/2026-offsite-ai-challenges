@@ -1,6 +1,6 @@
 # Challenge 1: Hello AI
 
-**Points:** 50 | **Tool:** Cursor | **Difficulty:** Easy
+**Points:** 50 | **Difficulty:** Easy
 
 ## Objective
 
@@ -9,7 +9,7 @@ Use your AI coding tool to generate Python function implementations from docstri
 ## Instructions
 
 1. Open `starter.py` — you'll find 3 functions with detailed docstrings but empty bodies (`pass`)
-2. Use Cursor's inline generation (Tab or Cmd+K) to implement each function based on the docstring
+2. Use your AI coding assistant to implement each function based on the docstring
 3. Run the test suite:
    ```bash
    pip install -r requirements.txt

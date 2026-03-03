@@ -1,7 +1,5 @@
 # Challenge 8: AI Menu Assistant (300 pts)
 
-**Tool:** Cursor
-
 ## Overview
 
 Build a CLI chatbot that uses the Claude API to answer questions about a restaurant menu. The chatbot reads menu data from `menu.json` and answers natural language questions accurately.
