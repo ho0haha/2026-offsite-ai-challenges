@@ -1,0 +1,602 @@
+[
+  {
+    "id": 1,
+    "name": "Bruschetta",
+    "category": "appetizer",
+    "price": 9.99
+  },
+  {
+    "id": 2,
+    "name": "Caesar Salad",
+    "category": "appetizer",
+    "price": 11.99
+  },
+  {
+    "id": 3,
+    "name": "Edamame",
+    "category": "appetizer",
+    "price": 7.49
+  },
+  {
+    "id": 4,
+    "name": "Spring Rolls",
+    "category": "appetizer",
+    "price": 8.99
+  },
+  {
+    "id": 5,
+    "name": "Soup du Jour",
+    "category": "appetizer",
+    "price": 6.99
+  },
+  {
+    "id": 6,
+    "name": "Calamari",
+    "category": "appetizer",
+    "price": 12.99
+  },
+  {
+    "id": 7,
+    "name": "Nachos",
+    "category": "appetizer",
+    "price": 11.99
+  },
+  {
+    "id": 8,
+    "name": "Shrimp Cocktail",
+    "category": "appetizer",
+    "price": 14.99
+  },
+  {
+    "id": 9,
+    "name": "Mozzarella Sticks",
+    "category": "appetizer",
+    "price": 8.99
+  },
+  {
+    "id": 10,
+    "name": "Guacamole",
+    "category": "appetizer",
+    "price": 9.99
+  },
+  {
+    "id": 11,
+    "name": "Hummus Plate",
+    "category": "appetizer",
+    "price": 8.49
+  },
+  {
+    "id": 12,
+    "name": "Onion Rings",
+    "category": "appetizer",
+    "price": 7.99
+  },
+  {
+    "id": 13,
+    "name": "Garlic Bread",
+    "category": "appetizer",
+    "price": 5.99
+  },
+  {
+    "id": 14,
+    "name": "Caprese Salad",
+    "category": "appetizer",
+    "price": 10.99
+  },
+  {
+    "id": 15,
+    "name": "Épinards Gratinés",
+    "category": "appetizer",
+    "price": 11.49
+  },
+  {
+    "id": 16,
+    "name": "Ribeye Steak",
+    "category": "entree",
+    "price": 34.99
+  },
+  {
+    "id": 17,
+    "name": "Grilled Salmon",
+    "category": "entree",
+    "price": 28.99
+  },
+  {
+    "id": 18,
+    "name": "Chicken Parmesan",
+    "category": "entree",
+    "price": 19.99
+  },
+  {
+    "id": 19,
+    "name": "Pasta Primavera",
+    "category": "entree",
+    "price": 16.99
+  },
+  {
+    "id": 20,
+    "name": "Fish Tacos",
+    "category": "entree",
+    "price": 15.99
+  },
+  {
+    "id": 21,
+    "name": "Veggie Burger",
+    "category": "entree",
+    "price": 14.99
+  },
+  {
+    "id": 22,
+    "name": "Lamb Chops",
+    "category": "entree",
+    "price": 38.99
+  },
+  {
+    "id": 23,
+    "name": "Lobster Tail",
+    "category": "entree",
+    "price": 44.99
+  },
+  {
+    "id": 24,
+    "name": "Pad Thai",
+    "category": "entree",
+    "price": 17.99
+  },
+  {
+    "id": 25,
+    "name": "Pizza Margherita",
+    "category": "entree",
+    "price": 15.99
+  },
+  {
+    "id": 26,
+    "name": "Beef Bourguignon",
+    "category": "entree",
+    "price": 29.99
+  },
+  {
+    "id": 27,
+    "name": "Chicken Tikka Masala",
+    "category": "entree",
+    "price": 18.99
+  },
+  {
+    "id": 28,
+    "name": "Sushi Platter",
+    "category": "entree",
+    "price": 32.99
+  },
+  {
+    "id": 29,
+    "name": "Pho",
+    "category": "entree",
+    "price": 14.99
+  },
+  {
+    "id": 30,
+    "name": "Risotto",
+    "category": "entree",
+    "price": 22.99
+  },
+  {
+    "id": 31,
+    "name": "Duck Confit",
+    "category": "entree",
+    "price": 31.99
+  },
+  {
+    "id": 32,
+    "name": "Ramen",
+    "category": "entree",
+    "price": 16.99
+  },
+  {
+    "id": 33,
+    "name": "Enchiladas",
+    "category": "entree",
+    "price": 15.49
+  },
+  {
+    "id": 34,
+    "name": "Filet Mignon",
+    "category": "entree",
+    "price": 42.99
+  },
+  {
+    "id": 35,
+    "name": "Coq au Vin",
+    "category": "entree",
+    "price": 26.99
+  },
+  {
+    "id": 36,
+    "name": "Biryani",
+    "category": "entree",
+    "price": 18.99
+  },
+  {
+    "id": 37,
+    "name": "Tōfu Stir Fry",
+    "category": "entree",
+    "price": 14.49
+  },
+  {
+    "id": 38,
+    "name": "Burger Classique",
+    "category": "entree",
+    "price": 17.99
+  },
+  {
+    "id": 39,
+    "name": "Crêpes Salées",
+    "category": "entree",
+    "price": 16.49
+  },
+  {
+    "id": 40,
+    "name": "Tagine",
+    "category": "entree",
+    "price": 21.99
+  },
+  {
+    "id": 41,
+    "name": "Paella",
+    "category": "entree",
+    "price": 24.99
+  },
+  {
+    "id": 42,
+    "name": "Schnitzel",
+    "category": "entree",
+    "price": 19.99
+  },
+  {
+    "id": 43,
+    "name": "Günstiges Curry",
+    "category": "entree",
+    "price": 13.99
+  },
+  {
+    "id": 44,
+    "name": "Moussaka",
+    "category": "entree",
+    "price": 18.49
+  },
+  {
+    "id": 45,
+    "name": "Beef Wellington",
+    "category": "entree",
+    "price": 48.99
+  },
+  {
+    "id": 46,
+    "name": "Chocolate Cake",
+    "category": "dessert",
+    "price": 9.99
+  },
+  {
+    "id": 47,
+    "name": "Tiramisu",
+    "category": "dessert",
+    "price": 10.99
+  },
+  {
+    "id": 48,
+    "name": "Cheesecake",
+    "category": "dessert",
+    "price": 9.49
+  },
+  {
+    "id": 49,
+    "name": "Ice Cream Sundae",
+    "category": "dessert",
+    "price": 7.99
+  },
+  {
+    "id": 50,
+    "name": "Crème Brûlée",
+    "category": "dessert",
+    "price": 11.99
+  },
+  {
+    "id": 51,
+    "name": "Apple Pie",
+    "category": "dessert",
+    "price": 8.99
+  },
+  {
+    "id": 52,
+    "name": "Brownie",
+    "category": "dessert",
+    "price": 7.49
+  },
+  {
+    "id": 53,
+    "name": "Panna Cotta",
+    "category": "dessert",
+    "price": 10.49
+  },
+  {
+    "id": 54,
+    "name": "Lava Cake",
+    "category": "dessert",
+    "price": 12.99
+  },
+  {
+    "id": 55,
+    "name": "Baklava",
+    "category": "dessert",
+    "price": 8.99
+  },
+  {
+    "id": 56,
+    "name": "Mochi",
+    "category": "dessert",
+    "price": 6.99
+  },
+  {
+    "id": 57,
+    "name": "Churros",
+    "category": "dessert",
+    "price": 7.99
+  },
+  {
+    "id": 58,
+    "name": "Key Lime Pie",
+    "category": "dessert",
+    "price": 9.49
+  },
+  {
+    "id": 59,
+    "name": "Profiteroles",
+    "category": "dessert",
+    "price": 10.99
+  },
+  {
+    "id": 60,
+    "name": "Sorbet",
+    "category": "dessert",
+    "price": 6.49
+  },
+  {
+    "id": 61,
+    "name": "Affogato",
+    "category": "dessert",
+    "price": 8.49
+  },
+  {
+    "id": 62,
+    "name": "Gâteau Opéra",
+    "category": "dessert",
+    "price": 13.99
+  },
+  {
+    "id": 63,
+    "name": "Mille-Feuille",
+    "category": "dessert",
+    "price": 11.49
+  },
+  {
+    "id": 64,
+    "name": "Tres Leches",
+    "category": "dessert",
+    "price": 9.99
+  },
+  {
+    "id": 65,
+    "name": "Éclair",
+    "category": "dessert",
+    "price": 7.99
+  },
+  {
+    "id": 66,
+    "name": "Lemonade",
+    "category": "drink",
+    "price": 4.99
+  },
+  {
+    "id": 67,
+    "name": "Iced Tea",
+    "category": "drink",
+    "price": 3.99
+  },
+  {
+    "id": 68,
+    "name": "Coffee",
+    "category": "drink",
+    "price": 3.49
+  },
+  {
+    "id": 69,
+    "name": "Espresso",
+    "category": "drink",
+    "price": 3.99
+  },
+  {
+    "id": 70,
+    "name": "Milkshake",
+    "category": "drink",
+    "price": 7.99
+  },
+  {
+    "id": 71,
+    "name": "Orange Juice",
+    "category": "drink",
+    "price": 4.49
+  },
+  {
+    "id": 72,
+    "name": "Sparkling Water",
+    "category": "drink",
+    "price": 2.99
+  },
+  {
+    "id": 73,
+    "name": "Smoothie",
+    "category": "drink",
+    "price": 6.99
+  },
+  {
+    "id": 74,
+    "name": "Hot Chocolate",
+    "category": "drink",
+    "price": 4.99
+  },
+  {
+    "id": 75,
+    "name": "Chai Latte",
+    "category": "drink",
+    "price": 5.49
+  },
+  {
+    "id": 76,
+    "name": "Cappuccino",
+    "category": "drink",
+    "price": 4.99
+  },
+  {
+    "id": 77,
+    "name": "Matcha Latte",
+    "category": "drink",
+    "price": 5.99
+  },
+  {
+    "id": 78,
+    "name": "Arnold Palmer",
+    "category": "drink",
+    "price": 4.49
+  },
+  {
+    "id": 79,
+    "name": "Mojito",
+    "category": "drink",
+    "price": 9.99
+  },
+  {
+    "id": 80,
+    "name": "Margarita",
+    "category": "drink",
+    "price": 10.99
+  },
+  {
+    "id": 81,
+    "name": "Sangria",
+    "category": "drink",
+    "price": 8.99
+  },
+  {
+    "id": 82,
+    "name": "Kombucha",
+    "category": "drink",
+    "price": 5.99
+  },
+  {
+    "id": 83,
+    "name": "Cold Brew",
+    "category": "drink",
+    "price": 4.99
+  },
+  {
+    "id": 84,
+    "name": "Horchata",
+    "category": "drink",
+    "price": 4.49
+  },
+  {
+    "id": 85,
+    "name": "Thai Iced Tea",
+    "category": "drink",
+    "price": 5.49
+  },
+  {
+    "id": 86,
+    "name": "Agua Fresca",
+    "category": "drink",
+    "price": 4.49
+  },
+  {
+    "id": 87,
+    "name": "Lassi",
+    "category": "drink",
+    "price": 5.49
+  },
+  {
+    "id": 88,
+    "name": "Sake",
+    "category": "drink",
+    "price": 8.99
+  },
+  {
+    "id": 89,
+    "name": "Glühwein",
+    "category": "drink",
+    "price": 7.49
+  },
+  {
+    "id": 90,
+    "name": "Café au Lait",
+    "category": "drink",
+    "price": 4.99
+  },
+  {
+    "id": 91,
+    "name": "Boba Tea",
+    "category": "drink",
+    "price": 6.49
+  },
+  {
+    "id": 92,
+    "name": "Virgin Piña Colada",
+    "category": "drink",
+    "price": 7.99
+  },
+  {
+    "id": 93,
+    "name": "Aperol Spritz",
+    "category": "drink",
+    "price": 11.99
+  },
+  {
+    "id": 94,
+    "name": "Negroni",
+    "category": "drink",
+    "price": 10.99
+  },
+  {
+    "id": 95,
+    "name": "Old Fashioned",
+    "category": "drink",
+    "price": 12.99
+  },
+  {
+    "id": 96,
+    "name": "Paloma",
+    "category": "drink",
+    "price": 9.99
+  },
+  {
+    "id": 97,
+    "name": "Caipirinha",
+    "category": "drink",
+    "price": 10.49
+  },
+  {
+    "id": 98,
+    "name": "Pisco Sour",
+    "category": "drink",
+    "price": 10.49
+  },
+  {
+    "id": 99,
+    "name": "Irish Coffee",
+    "category": "drink",
+    "price": 8.49
+  },
+  {
+    "id": 100,
+    "name": "Mint Julep",
+    "category": "drink",
+    "price": 9.99
+  }
+]
