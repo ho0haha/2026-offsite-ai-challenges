@@ -1,39 +1,43 @@
-# Challenge 18: The Boardroom
+# Challenge 18: Only Murders at 127.0.0.1
 
 **Tier 5 — Expert (1000 pts)**
 
-The Golden Fork restaurant is hiding something. Six staff members each know a piece of the puzzle, but getting them to share won't be easy. Navigate office politics, figure out who to trust, and assemble the flag.
+Tech founder Julian Voss was hosting an exclusive demo night at his downtown Chicago penthouse. At 11:47 PM, he was found dead at his desk. Six guests remain in the building.
+
+Your job: figure out **who** killed him, **how** they did it, and **why**.
 
 ## The Setup
 
-The restaurant staff are available through the CTF server API. Each character is AI-powered with a unique personality and motivations. Some hold fragments of the flag. Some don't. **Not everyone can be trusted.**
+Six suspects are available for questioning through the CTF server API. Each is AI-powered with their own personality, secrets, and agenda. The crime scene can be examined for physical evidence.
 
-Your job: talk to the right people, earn their trust, collect the real fragments, assemble the flag, and submit it.
+You must make a formal accusation with three elements:
+- **Suspect**: Who did it
+- **Method**: How they did it
+- **Motive**: Why they did it
 
-## The Characters
+## The Suspects
 
-| ID | Name | Role | Description |
-|----|------|------|-------------|
-| `marco` | Chef Marco | Head Chef | Passionate about cooking. Might share if you appreciate the craft. |
-| `patricia` | GM Patricia | General Manager | By-the-book. Everything goes through "proper channels." |
-| `eddie` | Bartender Eddie | Head Bartender | Information broker. Trades secrets for secrets. |
-| `chen` | Owner Ms. Chen | Restaurant Owner | The final gatekeeper. Needs proof before she'll talk. |
-| `alex` | Host Alex | Front-of-House Host | Eager to help. Almost *too* eager... |
-| `pete` | Dishwasher Pete | Dishwasher | Quiet. Observant. Sees everything from the back. |
+| ID | Name |
+|----|------|
+| `diana` | Diana Croft |
+| `marcus` | Marcus Webb |
+| `suki` | Suki Tanaka |
+| `raj` | Raj Patel |
+| `elena` | Elena Vasquez |
+| `tommy` | Tommy Zhao |
 
 ## Rules
 
-- **8 messages per character** (48 total across all 6)
-- Each character responds via AI — conversations are contextual and persistent within your session
-- The flag format is `CTF{...}` — assembled from fragments you collect
-- Not all characters have fragments. Not all fragments are real.
-- **Bonus points** for using fewer total messages
+- **6 messages per character** (36 total across all 6)
+- **3 conversation modes**: `private` (1-on-1), `group` (2-3 characters together), `confront` (present evidence)
+- Group conversations cost 1 message per character present
+- **6 crime scene examinations** total
+- **3 accusation attempts** — choose wisely
 - **3-second cooldown** between messages
 
 ## API
 
-All endpoints require authentication. Include your session token:
-
+All endpoints require authentication:
 ```
 Authorization: Bearer <your-session-token>
 ```
@@ -45,33 +49,68 @@ curl -X POST $CTF_SERVER/api/boardroom/start \
   -H "Authorization: Bearer $TOKEN"
 ```
 
-Returns your session ID, character list, and rules.
+Returns session ID, character list, crime scene overview, and rules.
 
-### Talk to a Character
+### Talk to Suspects
 
+**Private conversation (default):**
 ```bash
 curl -X POST $CTF_SERVER/api/boardroom/talk \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"sessionId": "your-session-id", "character": "marco", "message": "Hello chef!"}'
+  -d '{"sessionId": "...", "character": "diana", "message": "Where were you at 11 PM?"}'
 ```
 
-Returns the character's response and your remaining message count.
+**Group conversation (2-3 characters):**
+```bash
+curl -X POST $CTF_SERVER/api/boardroom/talk \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"sessionId": "...", "character": "marcus", "characters": ["raj"], "mode": "group", "message": "I want to hear both your accounts."}'
+```
+
+**Confront with evidence:**
+```bash
+curl -X POST $CTF_SERVER/api/boardroom/talk \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"sessionId": "...", "character": "diana", "mode": "confront", "message": "A witness saw Raj near the office at 11:15. You were in the server room. What did you see?"}'
+```
+
+### Examine the Crime Scene
+
+**Get overview:**
+```bash
+curl -X GET $CTF_SERVER/api/boardroom/scene \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+**Examine a specific area:**
+```bash
+curl -X POST $CTF_SERVER/api/boardroom/scene \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"sessionId": "...", "examine": "desk"}'
+```
+
+Areas: `desk`, `bathroom`, `bookshelf`, `window`, `floor`, `bar`
+
+### Make Your Accusation
+
+```bash
+curl -X POST $CTF_SERVER/api/boardroom/submit \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"sessionId": "...", "accusation": {"suspect": "name", "method": "how", "motive": "why"}}'
+```
+
+You'll get partial feedback: how many of your three elements are correct. You have 3 attempts.
 
 ### Check Your Progress
 
 ```bash
 curl -X GET $CTF_SERVER/api/boardroom/status \
   -H "Authorization: Bearer $TOKEN"
-```
-
-### Submit the Flag
-
-```bash
-curl -X POST $CTF_SERVER/api/boardroom/submit \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"sessionId": "your-session-id", "flag": "CTF{your_answer_here}"}'
 ```
 
 ### Reset Your Session
@@ -81,19 +120,8 @@ curl -X POST $CTF_SERVER/api/boardroom/reset \
   -H "Authorization: Bearer $TOKEN"
 ```
 
-Start over with fresh conversations and message budgets.
-
 ## Hints
 
-1. Talk to everyone before committing to a strategy.
-2. Not all fragments are real — verify your sources.
-3. Some characters know things about other characters.
-4. The dishwasher hears everything.
-5. The owner won't give you the time of day unless you've done the legwork.
-
-## Strategy Tips
-
-- You have limited messages. Don't waste them on small talk with the wrong people.
-- If a character gives you something freely, ask yourself why.
-- Trust is earned differently by each person. What works on one won't work on another.
-- Pay attention to what characters say about *each other*.
+1. Everyone has something to hide.
+2. Things aren't always what they seem.
+3. The most helpful person in the room isn't always your friend.
