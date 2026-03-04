@@ -11,7 +11,7 @@ Usage:
     3. Run: python agent_template.py
 
 Environment:
-    - ANTHROPIC_API_KEY is available if you want to use Claude for reasoning
+    - ctf_helper.ask_llm() provides Claude Haiku via the CTF server (no API key needed)
     - MAZE_SERVER_URL defaults to http://localhost:5000
 """
 
@@ -28,7 +28,10 @@ import requests
 # ---------------------------------------------------------------------------
 
 MAZE_SERVER_URL = os.environ.get("MAZE_SERVER_URL", "http://localhost:5000")
-ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
+# LLM access: use ctf_helper.ask_llm() for Claude Haiku via the CTF server
+import sys as _sys
+_sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+from ctf_helper import ask_llm
 
 # ---------------------------------------------------------------------------
 # Logging Setup
@@ -159,9 +162,8 @@ def solve_puzzle(room: dict, agent_state: dict) -> any:
         - ambiguity: Choose correct exit using info from previous rooms
         - boss: Multi-step puzzle combining multiple types
 
-    TIP: You can use the Claude API (ANTHROPIC_API_KEY) for reasoning
-    about complex puzzles. Consider sending the puzzle data to Claude
-    and parsing the response.
+    TIP: You can use ask_llm() for reasoning about complex puzzles.
+    Consider sending the puzzle data to the LLM and parsing the response.
     """
     puzzle = room.get("puzzle", {})
     puzzle_type = puzzle.get("type", "unknown")
@@ -344,10 +346,7 @@ def run_agent():
 if __name__ == "__main__":
     logger.info("=== The Agent Maze - Autonomous Agent ===")
     logger.info("Server: %s", MAZE_SERVER_URL)
-    if ANTHROPIC_API_KEY:
-        logger.info("Claude API key detected - AI reasoning available")
-    else:
-        logger.info("No ANTHROPIC_API_KEY set - AI reasoning unavailable")
+    logger.info("LLM proxy available via ctf_helper.ask_llm()")
 
     result = run_agent()
     print("\n=== Final Result ===")

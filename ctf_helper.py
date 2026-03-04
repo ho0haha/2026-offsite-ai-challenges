@@ -271,6 +271,58 @@ def submit(challenge_number, file_paths):
         return False
 
 
+def ask_llm(messages, system=None, max_tokens=1024):
+    """
+    Send messages to the CTF LLM proxy (Claude Haiku).
+
+    Uses the server's API key so you don't need your own.
+    Requires setup.py to have been run first (session cached in ~/.ctf_session).
+
+    Args:
+        messages: list of {"role": "user"|"assistant", "content": "..."} dicts
+        system: optional system prompt string
+        max_tokens: max response length (capped at 1024 server-side)
+
+    Returns:
+        The LLM response text (string).
+
+    Example:
+        response = ask_llm(
+            messages=[{"role": "user", "content": "What is 2+2?"}],
+            system="You are a helpful math tutor."
+        )
+        print(response)  # "4"
+    """
+    participant_id, _ = get_participant_id()
+    env = _load_env()
+    server = env["CTF_SERVER"].rstrip("/")
+
+    payload = {
+        "participantId": participant_id,
+        "messages": messages,
+    }
+    if system:
+        payload["system"] = system
+    if max_tokens:
+        payload["max_tokens"] = max_tokens
+
+    body = json.dumps(payload).encode("utf-8")
+    req = Request(f"{server}/api/llm/chat", data=body, method="POST")
+    req.add_header("Content-Type", "application/json")
+
+    try:
+        with urlopen(req, timeout=30) as resp:
+            result = json.loads(resp.read().decode("utf-8"))
+    except HTTPError as e:
+        error_body = e.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"LLM proxy error ({e.code}): {error_body}") from e
+
+    if "error" in result:
+        raise RuntimeError(f"LLM proxy error: {result['error']}")
+
+    return result["content"]
+
+
 # CLI mode: python ctf_helper.py <challenge_number> <file1> [file2] ...
 if __name__ == "__main__":
     if len(sys.argv) < 3:

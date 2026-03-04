@@ -100,7 +100,7 @@ Fetch the secret for API-type puzzle rooms.
 ## Tips
 
 - **Log everything.** Your agent should record every room visited, every puzzle encountered, and every answer attempted. You will need this data for Memory puzzles.
-- **Use the Claude API.** Set `ANTHROPIC_API_KEY` in your environment. Sending puzzle data to Claude can help with complex reasoning.
+- **Use the LLM proxy.** `ctf_helper.ask_llm()` gives you Claude Haiku with no API key needed. Sending puzzle data to the LLM can help with complex reasoning. You can also use any LLM you have access to.
 - **Handle failures gracefully.** If a puzzle answer is wrong, your agent should retry or move on, not crash.
 - **Budget your API calls.** You have 100 calls for 20 rooms. That is roughly 5 calls per room (solve attempts + navigation).
 - **Test incrementally.** Get your agent solving one puzzle type at a time before trying the full maze.

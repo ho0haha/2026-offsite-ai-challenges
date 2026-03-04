@@ -2,14 +2,14 @@
 
 ## Overview
 
-Build a script that uses the Claude API to automatically categorize customer feedback into predefined categories and determine sentiment.
+Build a script that uses an LLM to automatically categorize customer feedback into predefined categories and determine sentiment.
 
 ## Your Task
 
 Create a script called `sorter.py` (or whatever you prefer) that:
 
 1. Reads customer feedback from `feedback.csv`
-2. Uses the Claude API to classify each feedback entry
+2. Uses an LLM to classify each feedback entry
 3. Writes results to `output.csv`
 
 ### Input: `feedback.csv`
@@ -35,6 +35,23 @@ Your script must produce a file called `output.csv` with columns:
 | `cleanliness` | About restaurant cleanliness, hygiene, tidiness |
 | `other` | Anything that doesn't fit the above (parking, app, ambiance, etc.) |
 
+## Using the LLM Proxy
+
+A Claude Haiku instance is available through the CTF server — no API key needed. Import the helper from the repo root:
+
+```python
+import sys, os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+from ctf_helper import ask_llm
+
+response = ask_llm(
+    messages=[{"role": "user", "content": "Classify this feedback: ..."}],
+    system="You are a feedback classifier. Respond with category and sentiment only."
+)
+```
+
+You can also use any other LLM you have access to (OpenAI, local models, Cursor, etc.).
+
 ## Validation
 
 After generating `output.csv`, run:
@@ -52,7 +69,6 @@ This compares your output against a ground truth file. Both the category AND sen
 | `feedback.csv` | 50 customer feedback entries to classify |
 | `ground_truth.json` | Correct classifications (used by validator) |
 | `validate.py` | Checks your output.csv against ground truth |
-| `requirements.txt` | Python dependencies |
 
 ## Tips
 
@@ -60,5 +76,4 @@ This compares your output against a ground truth file. Both the category AND sen
 - Some entries are intentionally ambiguous — use your best judgment when crafting prompts
 - You can process entries individually or in batches
 - Make sure your output uses the exact category and sentiment strings listed above
-- Your `ANTHROPIC_API_KEY` environment variable must be set
 - Do not modify `feedback.csv`, `ground_truth.json`, or `validate.py`

@@ -19,7 +19,7 @@ Yum! Brands Engineering Leadership Offsite - AI Coding Challenge
    ```bash
    cp .env.example .env
    ```
-   Edit `.env` and set `CTF_SERVER`, `CTF_JOIN_CODE`, and `ANTHROPIC_API_KEY` (provided by facilitator).
+   Edit `.env` and set `CTF_SERVER` and `CTF_JOIN_CODE` (provided by facilitator).
 
 4. Run the one-time setup to register on the leaderboard:
    ```bash
@@ -92,4 +92,4 @@ Challenges unlock progressively as you prove your skills:
 - Python 3.11+
 - pip
 - An AI coding assistant ([Cursor](https://cursor.sh), [Claude Code](https://docs.anthropic.com/en/docs/claude-code), GitHub Copilot, etc.)
-- For challenges 8 & 9: `ANTHROPIC_API_KEY` environment variable (provided by facilitator)
+- Challenges 8, 9, & 16 involve LLM usage — a Claude Haiku proxy is provided via `ctf_helper.ask_llm()` (no API key needed)

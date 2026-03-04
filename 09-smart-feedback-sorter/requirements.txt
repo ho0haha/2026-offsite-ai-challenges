@@ -1,1 +1,3 @@
-anthropic>=0.30.0
+# No external dependencies required.
+# The ctf_helper.ask_llm() function uses only Python stdlib.
+# If you prefer a different LLM provider, install its SDK here.
