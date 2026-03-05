@@ -14,7 +14,7 @@ import sys
 random.seed(99)
 
 SENSORS = [f"sensor_{i:02d}" for i in range(10)]
-BASE_TS = 1700000000  # Starting timestamp
+BASE_TS = 1699999800  # Starting timestamp (aligned to 300s window)
 
 
 def generate(num_records=100000):

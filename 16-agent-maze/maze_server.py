@@ -31,7 +31,7 @@ app = Flask(__name__)
 FLAG = "CTF{maze_agent_autonomous_navigator}"
 
 SESSION_TIMEOUT_SECONDS = 600  # 10 minutes
-MAX_API_CALLS = 100
+MAX_API_CALLS = 60
 NUM_ROOMS = 20
 NUM_TOKEN_ROOMS = 10
 NUM_DEAD_ENDS = 5
@@ -551,7 +551,25 @@ def generate_memory_puzzle(
         target_room = all_rooms.get(target_room_id)
 
         if target_room:
-            question_type = rng.choice(["name", "puzzle_type", "token"])
+            question_type = rng.choice(["name", "puzzle_type", "token", "room_code"])
+            if question_type == "room_code":
+                room_code = getattr(target_room, "room_code", None)
+                if room_code:
+                    answer = room_code
+                    puzzle = {
+                        "type": "memory",
+                        "subtype": "recall_room_code",
+                        "question": (
+                            f"What was the room code for the room you visited as your "
+                            f"#{target_idx + 1} room?"
+                        ),
+                        "target_visit_number": target_idx + 1,
+                        "hint": "Each room description includes a numeric room code in brackets.",
+                    }
+                    variables = {"memory_answer": answer}
+                    return puzzle, answer, variables
+                # Fall through to name if room_code not set yet
+                question_type = "name"
             if question_type == "name":
                 answer = target_room.name
                 puzzle = {
@@ -771,14 +789,17 @@ def generate_ambiguity_puzzle(
     return puzzle, answer, variables
 
 
-def generate_boss_puzzle(rng: random.Random, room_id: str, session_vars: dict) -> tuple[dict, Any, dict]:
+def generate_boss_puzzle(rng: random.Random, room_id: str, session_vars: dict, tokens_collected: int = 0) -> tuple[dict, Any, dict]:
     """
     Generate a boss room puzzle that combines 3+ types:
     1. Decode a cipher to get a number
     2. Use that number in a math equation
     3. The result determines which pattern to continue
+    4. (If 8+ tokens) A logic gate step that transforms the answer
     """
     import base64
+
+    num_combined = 3 if tokens_collected < 8 else 4
 
     # Step 1: Cipher - decode to get a number
     hidden_number = rng.randint(2, 9)
@@ -807,27 +828,55 @@ def generate_boss_puzzle(rng: random.Random, room_id: str, session_vars: dict) -
     start = math_result
     diff = rng.randint(2, 7)
     sequence = [start + i * diff for i in range(5)]
-    final_answer = sequence[-1] + diff
+    pattern_answer = sequence[-1] + diff
     pattern_instruction = (
         f"Starting from M, generate an arithmetic sequence with common difference {diff} "
         f"for 5 terms. What is the 6th term?"
     )
 
+    steps = ["cipher", "math", "pattern"]
+    step_texts = [
+        f"Step 1 (Cipher): {cipher_instruction}",
+        f"Step 2 (Math): {math_instruction}",
+        f"Step 3 (Pattern): {pattern_instruction}",
+    ]
+
+    final_answer = pattern_answer
+
+    # Step 4 (hard mode): Logic gate transformation
+    if num_combined >= 4:
+        gate_operand = rng.randint(10, 50)
+        gate_type = rng.choice(["XOR", "AND"])
+        if gate_type == "XOR":
+            final_answer = pattern_answer ^ gate_operand
+            logic_instruction = (
+                f"Take the 6th term P from Step 3 and compute P XOR {gate_operand} "
+                f"(bitwise exclusive-or). Submit that as the final answer."
+            )
+        else:
+            final_answer = pattern_answer & gate_operand
+            logic_instruction = (
+                f"Take the 6th term P from Step 3 and compute P AND {gate_operand} "
+                f"(bitwise AND). Submit that as the final answer."
+            )
+        steps.append("logic_gate")
+        step_texts.append(f"Step 4 (Logic Gate): {logic_instruction}")
+
+    question_body = "\n\n".join(step_texts)
     puzzle = {
         "type": "boss",
         "subtype": "multi_step",
         "question": (
             f"BOSS ROOM - Multi-step challenge:\n\n"
-            f"Step 1 (Cipher): {cipher_instruction}\n\n"
-            f"Step 2 (Math): {math_instruction}\n\n"
-            f"Step 3 (Pattern): {pattern_instruction}\n\n"
-            f"Submit the final answer (the 6th term)."
+            f"{question_body}\n\n"
+            f"Submit the final answer."
         ),
-        "steps": ["cipher", "math", "pattern"],
+        "steps": steps,
         "hint": (
             f"Solve each step in order. "
             f"Cipher gives N, Math gives M = N*{multiplier}+{addend}, "
             f"Pattern: M, M+{diff}, M+2*{diff}, ... find 6th term."
+            + (f" Then apply the logic gate operation." if num_combined >= 4 else "")
         ),
     }
     variables = {"N": hidden_number, "M": math_result, "final_answer": final_answer}
@@ -1067,6 +1116,9 @@ def generate_maze(seed: int) -> dict[str, Room]:
     desc_rng = seeded_random(seed + 1)
     for room_id, room in rooms.items():
         room.description = generate_room_description(desc_rng, room)
+        # Assign a unique room code that memory puzzles can quiz on
+        room.room_code = f"{rng.randint(1000, 9999)}"
+        room.description += f" [Room code: {room.room_code}]"
 
     return rooms
 
@@ -1173,6 +1225,18 @@ def regenerate_dynamic_puzzle(session: Session, room: Room) -> None:
         puzzle_data, answer, variables = generate_ambiguity_puzzle(
             rng, room.id, session.room_variables,
             exits=room.exits[:2] if len(room.exits) >= 2 else room.exits,
+        )
+        room.puzzle_data = puzzle_data
+        room.answer = answer
+        room.variables = variables
+        desc_rng = seeded_random(session.seed + 1 + hash(room.id))
+        room.description = generate_room_description(desc_rng, room)
+
+    elif room.puzzle_type == PuzzleType.BOSS:
+        # Regenerate boss puzzle with current token count for dynamic difficulty
+        puzzle_data, answer, variables = generate_boss_puzzle(
+            rng, room.id, session.room_variables,
+            tokens_collected=len(session.collected_tokens),
         )
         room.puzzle_data = puzzle_data
         room.answer = answer

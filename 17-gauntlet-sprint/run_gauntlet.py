@@ -2,7 +2,7 @@
 """
 Gauntlet Sprint Master Runner
 Executes all 10 mini-challenge test suites and reports results.
-Prints the flag when 8 or more challenges pass.
+Prints the flag when 9 or more challenges pass.
 """
 
 import subprocess
@@ -22,8 +22,8 @@ CHALLENGES = [
     ("10_stream", "test_stream.py"),
 ]
 
-REQUIRED_PASS = 8
-FLAG = "CTF{gauntlet_sprint_8_of_10_complete}"
+REQUIRED_PASS = 9
+FLAG = "CTF{gauntlet_sprint_9_of_10_complete}"
 
 
 def run_challenge(base_dir, challenge_dir, test_file):

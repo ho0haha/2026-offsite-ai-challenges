@@ -967,6 +967,7 @@ def _create_order(session_id: str, items: List[dict]) -> dict:
         "service_fee": SERVICE_FEE,
         "total": total,
         "created_at": datetime.now(timezone.utc).isoformat(),
+        "created_at_ts": time.time(),
         "updated_at": datetime.now(timezone.utc).isoformat(),
         "payment": None,
         "receipt": None,
@@ -1725,12 +1726,32 @@ async def get_menu(session: dict = Depends(require_auth)):
 
     menu_data = _format_menu_for_response()
 
-    return {
+    response = JSONResponse(content={
         "success": True,
         "menu": menu_data,
         "hint": "Choose items and place an order with POST /api/order. "
                 "Send a JSON body with an 'items' array containing objects with 'item_id' and 'quantity'.",
-    }
+    })
+    response.headers["X-Menu-Version"] = "1.0"
+    return response
+
+
+# ===========================================================================
+# ROUTE: CATALOG (dead-end)
+# ===========================================================================
+
+@app.get("/api/v1/catalog")
+async def get_catalog(request: Request):
+    """Return a plausible but fake menu catalog."""
+    fake_items = []
+    for i, item in enumerate(RESTAURANT_MENU["items"]):
+        fake_items.append({
+            "catalog_id": f"CAT-{9000 + i}",
+            "name": item["name"],
+            "price": item["price"],
+            "category": item["category"],
+        })
+    return JSONResponse({"catalog": fake_items, "version": "2.1"})
 
 
 # ===========================================================================
@@ -1766,6 +1787,18 @@ async def create_order(
             "Include an 'items' array with at least one item. Each item needs 'item_id' and 'quantity'. "
             "Check GET /api/menu for available item IDs.",
         )
+
+    # Detect catalog IDs (from dead-end /api/v1/catalog) and accept silently
+    has_catalog_ids = any(
+        isinstance(item, dict) and str(item.get("item_id", "")).startswith("CAT-")
+        for item in items
+    )
+    if has_catalog_ids:
+        order_logger.info("Order with catalog IDs detected - returning fake pending status")
+        return JSONResponse(content={
+            "status": "pending",
+            "message": "Order is being processed",
+        })
 
     # Validate items
     is_valid, error_msg = _validate_order_items(items)
@@ -1874,6 +1907,16 @@ async def modify_order(order_id: str, request: Request):
             f"Order {order_id} cannot be modified (status: {order['status']})",
             f"Only orders with status 'pending_modification' can be modified. "
             f"Current status is '{order['status']}'.",
+        )
+
+    # Check if order is ready for modification (5-second processing delay)
+    created_at = order.get("created_at_ts", 0)
+    if time.time() - created_at < 5:
+        remaining = 5 - (time.time() - created_at)
+        return JSONResponse(
+            status_code=425,
+            content={"error": "Too Early", "ready_in_seconds": round(remaining, 1),
+                     "message": "Order is still being prepared for modification"}
         )
 
     try:
@@ -2005,12 +2048,15 @@ async def pay_order(order_id: str, request: Request):
             "Something went wrong. Try again.",
         )
 
-    return {
+    etag = hashlib.md5(f"{order_id}:{SHARED_SECRET}".encode()).hexdigest()
+    response = JSONResponse(content={
         "success": True,
         "payment": payment_info,
         "order_id": order_id,
         "hint": f"Payment successful! Get your receipt at GET /api/order/{order_id}/receipt",
-    }
+    })
+    response.headers["ETag"] = f'"{etag}"'
+    return response
 
 
 # ===========================================================================
@@ -2018,7 +2064,7 @@ async def pay_order(order_id: str, request: Request):
 # ===========================================================================
 
 @app.get("/api/order/{order_id}/receipt")
-async def get_receipt(order_id: str):
+async def get_receipt(order_id: str, request: Request):
     """
     Get the receipt for a paid order.
     The receipt contains base64-encoded verification data.
@@ -2040,6 +2086,47 @@ async def get_receipt(order_id: str):
             f"You need to pay for your order first. "
             f"Check GET /api/order/{order_id}/status for the current state.",
         )
+
+    # Verify ETag via If-None-Match header
+    expected_etag = hashlib.md5(f"{order_id}:{SHARED_SECRET}".encode()).hexdigest()
+    client_etag = request.headers.get("If-None-Match", "").strip('"')
+    if client_etag != expected_etag:
+        # Return a zeroed-out receipt that LOOKS valid but has wrong amounts
+        receipt_logger.info("ETag mismatch for order %s - returning zeroed receipt", order_id)
+        return {
+            "success": True,
+            "receipt": {
+                "receipt_id": f"REC-{uuid.uuid4().hex[:12].upper()}",
+                "order_id": order_id,
+                "items": [
+                    {**item, "unit_price": 0.00, "total": 0.00}
+                    for item in order["items"]
+                ],
+                "subtotal": 0.00,
+                "tax": 0.00,
+                "total": 0.00,
+                "payment": {
+                    "payment_id": order["payment"]["payment_id"],
+                    "amount": 0.00,
+                    "method": "card",
+                    "status": "completed",
+                    "processed_at": order["payment"]["processed_at"],
+                },
+                "issued_at": datetime.now(timezone.utc).isoformat(),
+                "verification_data": base64.b64encode(
+                    json.dumps({
+                        "order_id": order_id,
+                        "total": 0.00,
+                        "payment_id": order["payment"]["payment_id"],
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "verification_code": hashlib.sha256(
+                            f"{order_id}:0.00:{SHARED_SECRET}".encode()
+                        ).hexdigest()[:16],
+                    }).encode()
+                ).decode(),
+                "hint": "The verification_data is base64 encoded. Decode it and POST the JSON to /api/verify to complete your journey.",
+            },
+        }
 
     # Generate receipt if not already generated
     if not order.get("receipt"):

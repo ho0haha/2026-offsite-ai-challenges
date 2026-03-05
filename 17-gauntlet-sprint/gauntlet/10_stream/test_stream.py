@@ -76,9 +76,9 @@ def reference_aggregate(records):
 def test_simple_single_window():
     """Single window with a few records."""
     records = [
-        {"timestamp": 1700000000, "sensor_id": "s1", "value": 10.0},
-        {"timestamp": 1700000100, "sensor_id": "s1", "value": 20.0},
-        {"timestamp": 1700000200, "sensor_id": "s1", "value": 30.0},
+        {"timestamp": 1699999800, "sensor_id": "s1", "value": 10.0},
+        {"timestamp": 1699999900, "sensor_id": "s1", "value": 20.0},
+        {"timestamp": 1699999999, "sensor_id": "s1", "value": 30.0},
     ]
     input_lines = [json.dumps(r) for r in records]
     output_lines = run_processor(input_lines)
@@ -95,10 +95,10 @@ def test_simple_single_window():
 def test_multiple_sensors():
     """Multiple sensors in same window."""
     records = [
-        {"timestamp": 1700000000, "sensor_id": "a", "value": 5.0},
-        {"timestamp": 1700000001, "sensor_id": "b", "value": 15.0},
-        {"timestamp": 1700000002, "sensor_id": "a", "value": 10.0},
-        {"timestamp": 1700000003, "sensor_id": "b", "value": 25.0},
+        {"timestamp": 1699999800, "sensor_id": "a", "value": 5.0},
+        {"timestamp": 1699999801, "sensor_id": "b", "value": 15.0},
+        {"timestamp": 1699999802, "sensor_id": "a", "value": 10.0},
+        {"timestamp": 1699999803, "sensor_id": "b", "value": 25.0},
     ]
     input_lines = [json.dumps(r) for r in records]
     output_lines = run_processor(input_lines)
@@ -116,11 +116,11 @@ def test_multiple_sensors():
 def test_window_boundaries():
     """Records spanning multiple windows."""
     records = [
-        {"timestamp": 1700000000, "sensor_id": "s1", "value": 10.0},
-        {"timestamp": 1700000299, "sensor_id": "s1", "value": 20.0},
+        {"timestamp": 1699999800, "sensor_id": "s1", "value": 10.0},
+        {"timestamp": 1700000099, "sensor_id": "s1", "value": 20.0},
         # New window
-        {"timestamp": 1700000300, "sensor_id": "s1", "value": 30.0},
-        {"timestamp": 1700000599, "sensor_id": "s1", "value": 40.0},
+        {"timestamp": 1700000100, "sensor_id": "s1", "value": 30.0},
+        {"timestamp": 1700000399, "sensor_id": "s1", "value": 40.0},
     ]
     input_lines = [json.dumps(r) for r in records]
     output_lines = run_processor(input_lines)
@@ -129,11 +129,11 @@ def test_window_boundaries():
     results = [json.loads(line) for line in output_lines]
     results.sort(key=lambda x: x["window_start"])
 
-    assert results[0]["window_start"] == 1700000000
+    assert results[0]["window_start"] == 1699999800
     assert results[0]["count"] == 2
     assert results[0]["avg"] == 15.0
 
-    assert results[1]["window_start"] == 1700000300
+    assert results[1]["window_start"] == 1700000100
     assert results[1]["count"] == 2
     assert results[1]["avg"] == 35.0
 
@@ -144,7 +144,7 @@ def test_correctness_medium():
     random.seed(42)
 
     records = []
-    ts = 1700000000
+    ts = 1699999800
     sensors = ["alpha", "beta", "gamma"]
     for _ in range(1000):
         ts += random.randint(1, 5)
@@ -211,16 +211,16 @@ def test_large_dataset_memory():
 def test_sorted_output_within_window():
     """Output within each window must be sorted by sensor_id."""
     records = [
-        {"timestamp": 1700000000, "sensor_id": "z_sensor", "value": 1.0},
-        {"timestamp": 1700000001, "sensor_id": "a_sensor", "value": 2.0},
-        {"timestamp": 1700000002, "sensor_id": "m_sensor", "value": 3.0},
+        {"timestamp": 1699999800, "sensor_id": "z_sensor", "value": 1.0},
+        {"timestamp": 1699999801, "sensor_id": "a_sensor", "value": 2.0},
+        {"timestamp": 1699999802, "sensor_id": "m_sensor", "value": 3.0},
         # Force window close
-        {"timestamp": 1700000300, "sensor_id": "a_sensor", "value": 4.0},
+        {"timestamp": 1700000100, "sensor_id": "a_sensor", "value": 4.0},
     ]
     input_lines = [json.dumps(r) for r in records]
     output_lines = run_processor(input_lines)
 
     results = [json.loads(line) for line in output_lines]
-    first_window = [r for r in results if r["window_start"] == 1700000000]
+    first_window = [r for r in results if r["window_start"] == 1699999800]
     sensor_ids = [r["sensor_id"] for r in first_window]
     assert sensor_ids == sorted(sensor_ids), f"Not sorted: {sensor_ids}"
