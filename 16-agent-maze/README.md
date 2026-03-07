@@ -19,7 +19,7 @@ A maze server generates a labyrinth of 20 rooms. Hidden across the maze are 10 c
 ## Rules
 
 - You write your agent once and deploy it. **You cannot modify the agent mid-run.**
-- Each session has a **10-minute time limit** and a **100 API call limit**.
+- Each session has a **10-minute time limit** and a **60 API call limit**.
 - If your agent fails, a new session generates a **completely different maze** with new puzzles.
 - The maze is deterministic within a session (same actions produce same results).
 

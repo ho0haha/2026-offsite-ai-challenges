@@ -3,7 +3,7 @@ The Agent Maze - CTF Challenge Server
 ======================================
 A randomized puzzle maze that an autonomous AI agent must navigate.
 Each session generates a unique maze with 20 rooms, 10 collectible tokens,
-and 10 distinct puzzle types. Sessions expire after 10 minutes or 100 API calls.
+and 10 distinct puzzle types. Sessions expire after 10 minutes or 60 API calls.
 
 Run: python maze_server.py
 """
