@@ -23,11 +23,9 @@ Your function should:
 
 ## Using the LLM Proxy
 
-A Claude Haiku instance is available through the CTF server — no API key needed. Import the helper from the repo root:
+A Claude Haiku instance is available through the CTF server — no API key needed:
 
 ```python
-import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from ctf_helper import ask_llm
 
 response = ask_llm(
@@ -38,22 +36,21 @@ response = ask_llm(
 
 You can also use any other LLM you have access to (OpenAI, local models, Cursor, etc.).
 
-## Testing
+## Submission
 
-Run the test suite:
+When you're ready, submit your solution for server-side validation:
 
 ```bash
-python test_chatbot.py
+python ctf_helper.py 8 chatbot.py
 ```
 
-The test sends 10 questions about the menu and checks that your answers contain the correct information. You need to get at least **8 out of 10** correct — your solution is auto-submitted when you pass.
+The server sends 10 questions about the menu and checks that your answers contain the correct information. You need at least **8 out of 10** correct to pass.
 
 ## Files
 
 | File | Description |
 |------|-------------|
 | `menu.json` | The restaurant menu data (do not modify) |
-| `test_chatbot.py` | Sends 10 questions, checks answers |
 
 ## Tips
 
@@ -61,4 +58,4 @@ The test sends 10 questions about the menu and checks that your answers contain 
 - Make sure your LLM prompt includes the full menu data so the model can answer accurately
 - Be precise — the tests check for specific values (prices, item names, calorie counts)
 - Think about how to structure your system prompt to get accurate, factual answers
-- Do not modify `menu.json` or `test_chatbot.py`
+- Do not modify `menu.json`

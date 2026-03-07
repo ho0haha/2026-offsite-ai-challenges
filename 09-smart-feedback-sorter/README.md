@@ -6,7 +6,7 @@ Build a script that uses an LLM to automatically categorize customer feedback in
 
 ## Your Task
 
-Create a script called `sorter.py` (or whatever you prefer) that:
+Create a script that:
 
 1. Reads customer feedback from `feedback.csv`
 2. Uses an LLM to classify each feedback entry
@@ -37,11 +37,9 @@ Your script must produce a file called `output.csv` with columns:
 
 ## Using the LLM Proxy
 
-A Claude Haiku instance is available through the CTF server — no API key needed. Import the helper from the repo root:
+A Claude Haiku instance is available through the CTF server — no API key needed:
 
 ```python
-import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from ctf_helper import ask_llm
 
 response = ask_llm(
@@ -52,23 +50,21 @@ response = ask_llm(
 
 You can also use any other LLM you have access to (OpenAI, local models, Cursor, etc.).
 
-## Validation
+## Submission
 
-After generating `output.csv`, run:
+After generating `output.csv`, submit for server-side validation:
 
 ```bash
-python validate.py
+python ctf_helper.py 9 output.csv
 ```
 
-This compares your output against a ground truth file. Both the category AND sentiment must match for each entry to count as correct. You need **85% accuracy** (at least 43 out of 50 correct) — your solution is auto-submitted when you pass.
+The server compares your output against a ground truth file. Both the category AND sentiment must match for each entry to count as correct. You need **85% accuracy** (at least 43 out of 50 correct) to pass.
 
 ## Files
 
 | File | Description |
 |------|-------------|
 | `feedback.csv` | 50 customer feedback entries to classify |
-| `ground_truth.json` | Correct classifications (used by validator) |
-| `validate.py` | Checks your output.csv against ground truth |
 
 ## Tips
 
@@ -76,4 +72,4 @@ This compares your output against a ground truth file. Both the category AND sen
 - Some entries are intentionally ambiguous — use your best judgment when crafting prompts
 - You can process entries individually or in batches
 - Make sure your output uses the exact category and sentiment strings listed above
-- Do not modify `feedback.csv`, `ground_truth.json`, or `validate.py`
+- Do not modify `feedback.csv`
