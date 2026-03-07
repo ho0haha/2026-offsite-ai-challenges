@@ -151,19 +151,18 @@ def _validate_order(ctx):
     double-submissions. Returns True if the order is valid.
     """
     conn = database.db_pool.get_connection()
-    try:
-        # Check for recent duplicate orders from this client
-        existing = conn.fetchone()
 
-        if existing:
-            logger.warning(
-                f"[{ctx.request_id}] Duplicate order from {ctx.client_ip}"
-            )
-            return False
+    # Check for recent duplicate orders from this client
+    existing = conn.fetchone()
 
-        return True
-    finally:
-        database.db_pool.release_connection(conn)
+    if existing:
+        logger.warning(
+            f"[{ctx.request_id}] Duplicate order from {ctx.client_ip}"
+        )
+        return False
+
+    database.db_pool.release_connection(conn)
+    return True
 
 
 def _handle_get_order(ctx):
