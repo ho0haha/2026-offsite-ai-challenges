@@ -9,6 +9,7 @@ Participants must create chatbot.py with:
     def ask_menu_question(question: str) -> str
 """
 
+import os
 import sys
 import time
 
@@ -140,8 +141,48 @@ def check_must_contain_all_of_n(response: str, config: dict) -> bool:
     return match_count >= min_matches
 
 
+def _check_llm_usage():
+    """Verify that the chatbot actually uses ctf_helper.ask_llm().
+
+    This challenge is about building with LLMs — the whole point is to use
+    the provided LLM proxy to answer questions from menu data.  Deterministic
+    keyword-matching shortcuts miss the learning objective.
+
+    We instrument ctf_helper.ask_llm with a call counter so we can verify it
+    was invoked at least once during the test run.
+    """
+    try:
+        import ctf_helper
+        call_count = getattr(ctf_helper, "_ask_llm_call_count", 0)
+        return call_count > 0
+    except ImportError:
+        return False
+
+
+def _instrument_llm_tracker():
+    """Wrap ctf_helper.ask_llm to count calls."""
+    try:
+        import ctf_helper
+        if hasattr(ctf_helper, "_original_ask_llm"):
+            return  # already instrumented
+        original = ctf_helper.ask_llm
+        ctf_helper._original_ask_llm = original
+        ctf_helper._ask_llm_call_count = 0
+
+        def tracked_ask_llm(*args, **kwargs):
+            ctf_helper._ask_llm_call_count += 1
+            return original(*args, **kwargs)
+
+        ctf_helper.ask_llm = tracked_ask_llm
+    except (ImportError, AttributeError):
+        pass
+
+
 def run_tests():
     """Run all tests against the chatbot."""
+    # Instrument LLM tracking before importing the chatbot
+    _instrument_llm_tracker()
+
     # Import the participant's chatbot
     try:
         from chatbot import ask_menu_question
@@ -202,6 +243,15 @@ def run_tests():
     print()
 
     if passed >= 8:
+        # Verify the chatbot actually used the LLM proxy
+        if not _check_llm_usage():
+            print("  FAIL: Your chatbot must use ctf_helper.ask_llm() to answer questions.")
+            print("  This challenge is about building with LLMs — hardcoded or")
+            print("  deterministic answers don't count. Use the provided LLM proxy")
+            print("  to process questions against the menu data.")
+            print()
+            sys.exit(1)
+
         sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
         import ctf_helper
         ctf_helper.submit(8, ["chatbot.py"])
