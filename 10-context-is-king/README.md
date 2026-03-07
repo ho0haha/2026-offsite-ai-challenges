@@ -18,26 +18,20 @@ You have a working in-memory restaurant management system with customers, menu i
    - `payment_service.py` — Support paying with loyalty points
    - `reporting.py` — Add loyalty analytics report
    - `formatters.py` — Add loyalty summary formatting
-3. Run the test suite to verify your implementation
-
-## Running Tests
-
-```bash
-pip install -r requirements.txt
-python -m pytest tests/test_loyalty.py -v
-```
-
-## Success Criteria
-
-All 15 tests in `tests/test_loyalty.py` must pass.
 
 ## Submission
 
-When all tests pass, your solution is auto-submitted to the CTF server.
+When you're ready, submit your modified files for server-side validation:
+
+```bash
+python ctf_helper.py 10 restaurant_system/config.py restaurant_system/customer_service.py restaurant_system/order_service.py restaurant_system/payment_service.py restaurant_system/reporting.py restaurant_system/formatters.py
+```
+
+The server runs a test suite (15 tests) against your implementation. All tests must pass.
 
 ## Tips
 
 - Read the full feature spec before writing any code
 - The existing system is fully functional — don't break it
 - Look at existing patterns in the code to stay consistent
-- The tests tell you exactly what the system should do
+- The feature spec tells you exactly what the system should do

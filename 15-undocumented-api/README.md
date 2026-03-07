@@ -1,6 +1,6 @@
 # Challenge 15: The Undocumented API
 
-**Tier 4 | 500 points**
+**Tier 5 | 500 points**
 
 ## Setup
 

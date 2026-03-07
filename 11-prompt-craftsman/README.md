@@ -19,20 +19,16 @@ Complete 5 prompt engineering mini-challenges. For each challenge, you must craf
 1. Read each challenge's `task.md` for specific requirements
 2. Use your AI coding assistant to generate the required output
 3. Save each output to the corresponding file in `outputs/`
-4. Run the validator to check your work
-
-## Validation
-
-```bash
-pip install -r requirements.txt
-python validate_all.py
-```
-
-All 5 challenges must pass validation to capture the flag.
 
 ## Submission
 
-When all 5 challenges pass, your outputs are auto-submitted to the CTF server.
+When all 5 outputs are ready, submit them for server-side validation:
+
+```bash
+python ctf_helper.py 11 outputs/output1.md outputs/output2.md outputs/output3.md outputs/output4.md outputs/output5.md
+```
+
+The server validates that each output contains the required elements. All 5 must pass.
 
 ## Tips
 

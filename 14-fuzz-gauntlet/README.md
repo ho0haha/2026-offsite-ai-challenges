@@ -1,6 +1,6 @@
 # Challenge 14: The Fuzz Gauntlet
 
-**Tier 4 | 600 Points**
+**Tier 5 | 600 Points**
 
 ## Objective
 
@@ -56,11 +56,7 @@ Each test class runs 10,000+ random inputs. Be patient -- this takes a minute or
 
 ## Validation
 
-When all tests pass:
-
-```
-FLAG: CTF{fuzz_tested_and_bulletproof}
-```
+When all property tests pass, the flag is printed. Submit it on the challenge card to record your score.
 
 ## Tips
 

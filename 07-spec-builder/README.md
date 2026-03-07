@@ -15,14 +15,9 @@ Create a file called `prd.md` that includes:
 3. **Edge Cases / Error Handling** — A section describing edge cases and how the system should handle errors.
 4. **Technical Approach** — A section describing the technical approach, architecture, or implementation strategy.
 
-Validate your PRD:
-```bash
-python prd_validator.py prd.md
-```
-
 ## Phase 2: Build the Feature
 
-Based on your PRD, implement a `waste_tracker.py` module that passes all tests in `test_implementation.py`.
+Based on your PRD, implement a `waste_tracker.py` module.
 
 The module should provide a `WasteTracker` class that can:
 - Log food waste entries (date, item, quantity, unit, reason, brand)
@@ -31,33 +26,25 @@ The module should provide a `WasteTracker` class that can:
 - Determine waste trends (increasing, decreasing, or stable)
 - Export data to CSV
 
-Run the tests:
+## Submission
+
+When you're ready, submit your solution for server-side validation:
+
 ```bash
-python -m pytest test_implementation.py -v
+python ctf_helper.py 7 prd.md
 ```
 
-## Validation
-
-Once both phases pass, run:
-```bash
-bash validate.sh
-```
-
-This will verify your PRD structure and run all implementation tests. If everything passes, your solution is auto-submitted.
+The server validates your PRD structure (user stories, acceptance criteria, edge cases, and technical approach sections). If everything passes, your score is recorded.
 
 ## Files
 
 | File | Description |
 |------|-------------|
 | `brief.md` | The 3-sentence business brief |
-| `prd_validator.py` | Validates your PRD structure |
-| `test_implementation.py` | Tests for your implementation |
-| `validate.sh` | Runs both validators, prints flag |
 | `requirements.txt` | Python dependencies |
 
 ## Rules
 
 - You must create `prd.md` (your PRD) and `waste_tracker.py` (your implementation)
-- The PRD must pass `prd_validator.py`
-- The implementation must pass all tests in `test_implementation.py`
-- Do not modify test files or the validator
+- The PRD must include all 4 required sections
+- Do not modify `brief.md`

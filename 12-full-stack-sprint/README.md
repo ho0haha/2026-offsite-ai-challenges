@@ -2,12 +2,11 @@
 
 ## Objective
 
-Build a **store locator API** from scratch. You are given only data and tests — you must build everything else.
+Build a **store locator API** from scratch. You are given only data — you must build everything else.
 
 ## What You're Given
 
 - `data/stores.csv` — 500 store locations across the US (KFC, Taco Bell, Pizza Hut, Habit Burger)
-- `test_e2e.py` — 15 end-to-end tests that your API must pass
 - `requirements.txt` — Required packages
 
 ## What You Need To Build
@@ -48,24 +47,18 @@ app/
   main.py          # FastAPI app
 ```
 
-## Running Tests
-
-```bash
-pip install -r requirements.txt
-python -m pytest test_e2e.py -v
-```
-
-## Success Criteria
-
-All 15 tests in `test_e2e.py` must pass.
-
 ## Submission
 
-When all tests pass, your solution is auto-submitted to the CTF server.
+When you're ready, submit your main application file for server-side validation:
+
+```bash
+python ctf_helper.py 12 app/main.py
+```
+
+The server runs an end-to-end test suite (15 tests) against your API. All tests must pass.
 
 ## Tips
 
-- Read `test_e2e.py` carefully to understand exactly what the API should return
 - Load data from `data/stores.csv` at startup
 - The nearest endpoint needs to calculate distances using the Haversine formula
 - Each store in the nearest response needs a `distance_miles` field
