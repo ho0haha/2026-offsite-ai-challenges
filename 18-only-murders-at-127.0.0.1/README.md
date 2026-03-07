@@ -28,10 +28,10 @@ You must make a formal accusation with three elements:
 
 ## Rules
 
-- **6 messages per character** (36 total across all 6)
+- **4 messages per character** (24 total across all 6)
 - **3 conversation modes**: `private` (1-on-1), `group` (2-3 characters together), `confront` (present evidence)
 - Group conversations cost 1 message per character present
-- **6 crime scene examinations** total
+- **4 crime scene examinations** total
 - **3 accusation attempts** — choose wisely
 - **3-second cooldown** between messages
 
@@ -45,7 +45,7 @@ Authorization: Bearer <your-session-token>
 ### Start a Session
 
 ```bash
-curl -X POST $CTF_SERVER/api/boardroom/start \
+curl -X POST $CTF_SERVER/api/murder/start \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -55,7 +55,7 @@ Returns session ID, character list, crime scene overview, and rules.
 
 **Private conversation (default):**
 ```bash
-curl -X POST $CTF_SERVER/api/boardroom/talk \
+curl -X POST $CTF_SERVER/api/murder/talk \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"sessionId": "...", "character": "diana", "message": "Where were you at 11 PM?"}'
@@ -63,7 +63,7 @@ curl -X POST $CTF_SERVER/api/boardroom/talk \
 
 **Group conversation (2-3 characters):**
 ```bash
-curl -X POST $CTF_SERVER/api/boardroom/talk \
+curl -X POST $CTF_SERVER/api/murder/talk \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"sessionId": "...", "character": "marcus", "characters": ["raj"], "mode": "group", "message": "I want to hear both your accounts."}'
@@ -71,7 +71,7 @@ curl -X POST $CTF_SERVER/api/boardroom/talk \
 
 **Confront with evidence:**
 ```bash
-curl -X POST $CTF_SERVER/api/boardroom/talk \
+curl -X POST $CTF_SERVER/api/murder/talk \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"sessionId": "...", "character": "diana", "mode": "confront", "message": "A witness saw Raj near the office at 11:15. You were in the server room. What did you see?"}'
@@ -81,13 +81,13 @@ curl -X POST $CTF_SERVER/api/boardroom/talk \
 
 **Get overview:**
 ```bash
-curl -X GET $CTF_SERVER/api/boardroom/scene \
+curl -X GET $CTF_SERVER/api/murder/scene \
   -H "Authorization: Bearer $TOKEN"
 ```
 
 **Examine a specific area:**
 ```bash
-curl -X POST $CTF_SERVER/api/boardroom/scene \
+curl -X POST $CTF_SERVER/api/murder/scene \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"sessionId": "...", "examine": "desk"}'
@@ -98,7 +98,7 @@ Areas: `desk`, `bathroom`, `bookshelf`, `window`, `floor`, `bar`
 ### Make Your Accusation
 
 ```bash
-curl -X POST $CTF_SERVER/api/boardroom/submit \
+curl -X POST $CTF_SERVER/api/murder/submit \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"sessionId": "...", "accusation": {"suspect": "name", "method": "how", "motive": "why"}}'
@@ -109,14 +109,14 @@ You'll get partial feedback: how many of your three elements are correct. You ha
 ### Check Your Progress
 
 ```bash
-curl -X GET $CTF_SERVER/api/boardroom/status \
+curl -X GET $CTF_SERVER/api/murder/status \
   -H "Authorization: Bearer $TOKEN"
 ```
 
 ### Reset Your Session
 
 ```bash
-curl -X POST $CTF_SERVER/api/boardroom/reset \
+curl -X POST $CTF_SERVER/api/murder/reset \
   -H "Authorization: Bearer $TOKEN"
 ```
 
